@@ -4,21 +4,14 @@ type Type int
 
 const (
 	UnknownType Type = iota
-	IntSlice
-	Int32Slice
-	Int64Slice
-	Float32Slice
-	Float64Slice
-	BoolSlice
-	StringSlice
-
-	StringIntMap
-	StringInt32Map
-	StringInt64Map
-	StringFloat32Map
-	StringFloat64Map
-	StringBoolMap
-	StringStringMap
+	IntSliceType
+	//Need to implement more types in the counter package
+	//Int32SliceType
+	//Int64SliceType
+	//Float32SliceType
+	//Float64SliceType
+	//BoolSliceType
+	//StringSliceType
 )
 
 type Element struct {
@@ -28,5 +21,5 @@ type Element struct {
 
 // Iterable is anything that can be ranged on
 type Iterable interface {
-	Iterate() (Element, bool)
+	Iterate() <-chan Element
 }

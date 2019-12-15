@@ -1,41 +1,72 @@
 package counter
 
 import (
-	"sort"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+
+	"github.com/marcsantiago/collections"
 )
 
-func TestIntSliceCounter_Next(t *testing.T) {
-	type fields struct {
-		arr []int
+func TestCounter(t *testing.T) {
+	type args struct {
+		data         []collections.Data
+		optionalType []collections.Type
 	}
 	tests := []struct {
-		name       string
-		fields     fields
-		wantValues []int
+		name string
+		args args
+		want collections.CounterMap
 	}{
 		{
-			name: "basic test",
-			fields: fields{
-				arr: []int{2, 2, 3, 4, 4, 4, 10, 11, 11},
+			name: "should count int slice without type passed in",
+			args: args{
+				data:         collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11}.Data(),
+				optionalType: nil,
 			},
-			wantValues: []int{2, 1, 3, 1, 2},
+			want: IntMap{2: 2, 3: 1, 4: 3, 10: 1, 11: 2},
+		},
+		{
+			name: "should count int slice with type passed in",
+			args: args{
+				data:         collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11}.Data(),
+				optionalType: []collections.Type{collections.IntSliceType},
+			},
+			want: IntMap{2: 2, 3: 1, 4: 3, 10: 1, 11: 2},
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sort.Ints(tt.wantValues)
-			var values []int
-			o := NewIntSliceCounter(tt.fields.arr)
-			for element := range o.Next() {
-				values = append(values, element.Value.Int())
-			}
-			sort.Ints(values)
-			if !cmp.Equal(tt.wantValues, values) {
-				t.Fatalf("IntSliceCounter_Next() got values are not expected diff\n%+v", cmp.Diff(tt.wantValues, values))
+			c := Counter(tt.args.data, tt.args.optionalType...)
+			if !cmp.Equal(tt.want, c) {
+				t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, c))
 			}
 		})
+	}
+}
+
+//BenchmarkCounterNoType-12      	 1605631	       738 ns/op	     494 B/op	       3 allocs/op
+//BenchmarkCounterNoType-12      	 1641736	       717 ns/op	     494 B/op	       3 allocs/op
+//BenchmarkCounterNoType-12      	 1683136	       708 ns/op	     494 B/op	       3 allocs/op
+func BenchmarkCounterNoType(b *testing.B) {
+	var c collections.CounterMap
+	_ = c
+	data := collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11, 1, 1, 2, 7, 7, 8, 8, 9, 10, 19, 20}.Data()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		c = Counter(data)
+	}
+}
+
+//BenchmarkCounterWithType-12    	 1700364	       709 ns/op	     494 B/op	       3 allocs/op
+//BenchmarkCounterWithType-12    	 1691558	       698 ns/op	     494 B/op	       3 allocs/op
+//BenchmarkCounterWithType-12    	 1666542	       700 ns/op	     494 B/op	       3 allocs/op
+func BenchmarkCounterWithType(b *testing.B) {
+	var c collections.CounterMap
+	_ = c
+	data := collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11, 1, 1, 2, 7, 7, 8, 8, 9, 10, 19, 20}.Data()
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		c = Counter(data, collections.IntSliceType)
 	}
 }
