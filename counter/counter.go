@@ -36,8 +36,6 @@ func Counter(data []collections.Data, optionalType ...collections.Type) collecti
 	case collections.StringSliceType:
 		hash = make(StringMap)
 	case collections.UnknownType:
-		panic("slice type could not be determined")
-	default:
 		// if the type cannot be found then we return panic
 		// this is not very Go like, since no error is returned
 		// however by design we are trying to emulate how python's Counter object would behave
