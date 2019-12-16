@@ -16,12 +16,12 @@ func (i IntValue) String() string {
 }
 
 // IntValues type alias for a slice of IntValue
-type IntValues []IntValue
+type IntValues []int
 
 func (i IntValues) Data() []Data {
 	d := make([]Data, len(i))
 	for j := range i {
-		d[j] = i[j]
+		d[j] = IntValue(i[j])
 	}
 	return d
 }
@@ -43,10 +43,10 @@ func (s StringValue) String() string {
 // StringValues type alias for a slice of StringValue
 type StringValues []StringValue
 
-//func (s StringValue) Data() []Data {
-//	d := make([]Data, len(s))
-//	for j := range s {
-//		d[j] = s[j]
-//	}
-//	return d
-//}
+func (s StringValue) Data() []Data {
+	d := make([]Data, len(s))
+	for j := range s {
+		d[j] = StringValue(s[j])
+	}
+	return d
+}
