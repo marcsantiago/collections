@@ -46,6 +46,94 @@ func (i IntValues) Data() []Data {
 	return d
 }
 
+// IntValue32 type alias for int
+type IntValue32 int32
+
+// Int casts and returns int value
+func (i IntValue32) Int() int {
+	return int(i)
+}
+
+// Int32 casts and returns Int32 value
+func (i IntValue32) Int32() int32 {
+	return int32(i)
+}
+
+// Int64 casts and returns Int64 value
+func (i IntValue32) Int64() int64 {
+	return int64(i)
+}
+
+// Float32 casts and returns Float32 value
+func (i IntValue32) Float32() float32 {
+	return float32(i)
+}
+
+// Float64 casts and returns Float64 value
+func (i IntValue32) Float64() float64 {
+	return float64(i)
+}
+
+// String casts and returns string value
+func (i IntValue32) String() string {
+	return strconv.Itoa(int(i))
+}
+
+// IntValues32 type alias for a slice of IntValue
+type IntValues32 []int32
+
+func (i IntValues32) Data() []Data {
+	d := make([]Data, len(i))
+	for j := range i {
+		d[j] = IntValue32(i[j])
+	}
+	return d
+}
+
+// IntValue64 type alias for int
+type IntValue64 int64
+
+// Int casts and returns int value
+func (i IntValue64) Int() int {
+	return int(i)
+}
+
+// Int32 casts and returns Int32 value
+func (i IntValue64) Int32() int32 {
+	return int32(i)
+}
+
+// Int64 casts and returns Int64 value
+func (i IntValue64) Int64() int64 {
+	return int64(i)
+}
+
+// Float32 casts and returns Float32 value
+func (i IntValue64) Float32() float32 {
+	return float32(i)
+}
+
+// Float64 casts and returns Float64 value
+func (i IntValue64) Float64() float64 {
+	return float64(i)
+}
+
+// String casts and returns string value
+func (i IntValue64) String() string {
+	return strconv.Itoa(int(i))
+}
+
+// IntValues64 type alias for a slice of IntValue
+type IntValues64 []int64
+
+func (i IntValues64) Data() []Data {
+	d := make([]Data, len(i))
+	for j := range i {
+		d[j] = IntValue64(i[j])
+	}
+	return d
+}
+
 // StringValue type alias for string
 type StringValue string
 
@@ -87,7 +175,7 @@ func (s StringValue) String() string {
 // StringValues type alias for a slice of StringValue
 type StringValues []StringValue
 
-func (s StringValue) Data() []Data {
+func (s StringValues) Data() []Data {
 	d := make([]Data, len(s))
 	for j := range s {
 		d[j] = StringValue(s[j])

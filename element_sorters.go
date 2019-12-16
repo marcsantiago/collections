@@ -1,5 +1,10 @@
 package collections
 
+type Element struct {
+	Key   Data
+	Value Data
+}
+
 // ElementsByKeyStringAsc used to used low to high where key is of type string
 type ElementsByKeyStringAsc []Element
 

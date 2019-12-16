@@ -34,6 +34,30 @@ func TestCounter(t *testing.T) {
 			},
 			want: IntMap{2: 2, 3: 1, 4: 3, 10: 1, 11: 2},
 		},
+		{
+			name: "should count int32 slice without type passed in",
+			args: args{
+				data:         collections.IntValues32{2, 2, 3, 4, 4, 4, 10, 11, 11}.Data(),
+				optionalType: nil,
+			},
+			want: IntMap32{2: 2, 3: 1, 4: 3, 10: 1, 11: 2},
+		},
+		{
+			name: "should count int64 slice without type passed in",
+			args: args{
+				data:         collections.IntValues64{2, 2, 3, 4, 4, 4, 10, 11, 11}.Data(),
+				optionalType: nil,
+			},
+			want: IntMap64{2: 2, 3: 1, 4: 3, 10: 1, 11: 2},
+		},
+		{
+			name: "should count string slice without type passed in",
+			args: args{
+				data:         collections.StringValues{"2", "2", "3", "4", "4", "4", "10", "11", "11"}.Data(),
+				optionalType: nil,
+			},
+			want: StringMap{"2": 2, "3": 1, "4": 3, "10": 1, "11": 2},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

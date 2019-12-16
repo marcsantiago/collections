@@ -12,7 +12,6 @@ import (
 // e.g []int, []int32, []int64, []float32, []float64, []bool, []string
 func Counter(data []collections.Data, optionalType ...collections.Type) collections.CounterMap {
 	var hash collections.CounterMap
-
 	specifiedType := collections.UnknownType
 	if len(optionalType) > 0 {
 		specifiedType = optionalType[0]
@@ -25,6 +24,12 @@ func Counter(data []collections.Data, optionalType ...collections.Type) collecti
 	//use reflection to try and get the dataType
 	case collections.IntSliceType:
 		hash = make(IntMap)
+	case collections.Int32SliceType:
+		hash = make(IntMap32)
+	case collections.Int64SliceType:
+		hash = make(IntMap64)
+	case collections.StringSliceType:
+		hash = make(StringMap)
 	case collections.UnknownType:
 		panic("slice type could not be determined")
 	default:
@@ -46,6 +51,14 @@ func determineDataType(data collections.Data) collections.Type {
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Int:
 		return collections.IntSliceType
+	case reflect.Int32:
+		return collections.Int32SliceType
+	case reflect.Int64:
+		return collections.Int64SliceType
+	case reflect.Float32, reflect.Float64:
+		return collections.UnknownType
+	case reflect.String:
+		return collections.StringSliceType
 	}
 	return collections.UnknownType
 }

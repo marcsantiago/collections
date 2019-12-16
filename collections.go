@@ -5,15 +5,10 @@ type Type int
 const (
 	UnknownType Type = iota
 	IntSliceType
-	//Need to implement more types in the counter package
-	//Int32SliceType
-	//Int64SliceType
+	Int32SliceType
+	Int64SliceType
+	// not implemented as floats cannot be map keys
 	//Float32SliceType
 	//Float64SliceType
-	//StringSliceType
+	StringSliceType
 )
-
-type Element struct {
-	Key   Data
-	Value Data
-}
