@@ -6,4 +6,5 @@ type CounterMap interface {
 	Set(value Data)
 	Delete(value Data)
 	Items() []Element
+	String() string
 }

@@ -1,6 +1,7 @@
 package counter
 
 import (
+	"encoding/json"
 	"reflect"
 
 	"github.com/marcsantiago/collections"
@@ -44,6 +45,11 @@ func (i IntMap) Iterate() <-chan collections.Element {
 		close(ch)
 	}()
 	return ch
+}
+
+func (i IntMap) String() string {
+	b, _ := json.Marshal(i)
+	return string(b)
 }
 
 // Counter is a python like abstraction on counting slice data

@@ -51,7 +51,7 @@ func TestCounter(t *testing.T) {
 func BenchmarkCounterNoType(b *testing.B) {
 	var c collections.CounterMap
 	_ = c
-	data := collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11, 1, 1, 2, 7, 7, 8, 8, 9, 10, 19, 20}.Data()
+	data := collections.IntValues([]int{2, 2, 3, 4, 4, 4, 10, 11, 11, 1, 1, 2, 7, 7, 8, 8, 9, 10, 19, 20}).Data()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		c = Counter(data)
@@ -64,7 +64,7 @@ func BenchmarkCounterNoType(b *testing.B) {
 func BenchmarkCounterWithType(b *testing.B) {
 	var c collections.CounterMap
 	_ = c
-	data := collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11, 1, 1, 2, 7, 7, 8, 8, 9, 10, 19, 20}.Data()
+	data := collections.IntValues([]int{2, 2, 3, 4, 4, 4, 10, 11, 11, 1, 1, 2, 7, 7, 8, 8, 9, 10, 19, 20}).Data()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		c = Counter(data, collections.IntSliceType)
