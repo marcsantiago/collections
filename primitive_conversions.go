@@ -261,7 +261,7 @@ func (s StringValue) String() string {
 }
 
 // StringValues type alias for a slice of StringValue
-type StringValues []StringValue
+type StringValues []string
 
 func (s StringValues) Data() []Data {
 	d := make([]Data, len(s))
