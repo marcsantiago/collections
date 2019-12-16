@@ -2,11 +2,11 @@ package collections
 
 type CounterMap interface {
 	Iterable
-	Get(key Data) (Data, bool)
-	Update(value Data)
-	Subtract(value Data)
 	Delete(value Data)
+	Get(key Data) (Data, bool)
 	Items() []Element
-	String() string
 	MostCommon(n int) []Element
+	String() string
+	Subtract(value Data)
+	Update(value Data)
 }
