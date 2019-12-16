@@ -16,8 +16,15 @@ func (i IntMap) Get(key collections.Data) (collections.Data, bool) {
 }
 
 // Update updates the counter for a value or sets it if it does not exist
-func (i IntMap) Update(value collections.Data) {
-	i[value.Int()]++
+func (i IntMap) Update(key collections.Data) {
+	i[key.Int()]++
+}
+
+func (i IntMap) Subtract(key collections.Data) {
+	_, ok := i[key.Int()]
+	if ok {
+		i[key.Int()]--
+	}
 }
 
 // Delete removes a value from the map by it's key
