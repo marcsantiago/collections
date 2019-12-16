@@ -10,7 +10,6 @@ const (
 	//Int64SliceType
 	//Float32SliceType
 	//Float64SliceType
-	//BoolSliceType
 	//StringSliceType
 )
 
