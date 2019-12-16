@@ -2,6 +2,7 @@ package counter
 
 import (
 	"encoding/json"
+	"sort"
 
 	"github.com/marcsantiago/collections"
 )
@@ -41,6 +42,18 @@ func (i IntMap) Iterate() <-chan collections.Element {
 		close(ch)
 	}()
 	return ch
+}
+
+func (i IntMap) MostCommon(n int) []collections.Element {
+	elements := make([]collections.Element, 0, len(i))
+	for key, value := range i {
+		elements = append(elements, collections.Element{
+			Key:   collections.IntValue(key),
+			Value: collections.IntValue(value),
+		})
+	}
+	sort.Sort(collections.ElementsByValueIntDesc(elements))
+	return elements[:n]
 }
 
 func (i IntMap) String() string {

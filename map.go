@@ -7,4 +7,5 @@ type CounterMap interface {
 	Delete(value Data)
 	Items() []Element
 	String() string
+	MostCommon(n int) []Element
 }

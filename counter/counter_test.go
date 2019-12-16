@@ -1,6 +1,7 @@
 package counter
 
 import (
+	"sort"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -40,6 +41,42 @@ func TestCounter(t *testing.T) {
 			c := Counter(tt.args.data, tt.args.optionalType...)
 			if !cmp.Equal(tt.want, c) {
 				t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, c))
+			}
+		})
+	}
+}
+
+func TestCounter_MostCommon(t *testing.T) {
+	type args struct {
+		data         []collections.Data
+		optionalType []collections.Type
+	}
+	tests := []struct {
+		name string
+		args args
+		want []collections.Element
+	}{
+		{
+			name: "should count int slice with type passed in and get the 3 most common",
+			args: args{
+				data:         collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11}.Data(),
+				optionalType: []collections.Type{collections.IntSliceType},
+			},
+			want: []collections.Element{
+				{Key: collections.IntValue(4), Value: collections.IntValue(3)},
+				{Key: collections.IntValue(2), Value: collections.IntValue(2)},
+				{Key: collections.IntValue(11), Value: collections.IntValue(2)},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := Counter(tt.args.data, tt.args.optionalType...)
+			elements := c.MostCommon(3)
+			sort.Sort(collections.ElementsByValueIntDesc(elements))
+			sort.Sort(collections.ElementsByValueIntDesc(tt.want))
+			if !cmp.Equal(tt.want, elements) {
+				t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, elements))
 			}
 		})
 	}
