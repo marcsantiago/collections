@@ -134,6 +134,94 @@ func (i IntValues64) Data() []Data {
 	return d
 }
 
+// FloatValue32 type alias for int
+type FloatValue32 int32
+
+// Int casts and returns int value
+func (i FloatValue32) Int() int {
+	return int(i)
+}
+
+// Int32 casts and returns Int32 value
+func (i FloatValue32) Int32() int32 {
+	return int32(i)
+}
+
+// Int64 casts and returns Int64 value
+func (i FloatValue32) Int64() int64 {
+	return int64(i)
+}
+
+// Float32 casts and returns Float32 value
+func (i FloatValue32) Float32() float32 {
+	return float32(i)
+}
+
+// Float64 casts and returns Float64 value
+func (i FloatValue32) Float64() float64 {
+	return float64(i)
+}
+
+// String casts and returns string value
+func (i FloatValue32) String() string {
+	return strconv.FormatFloat(float64(i), 'f', -1, 32)
+}
+
+// FloatValues32 type alias for a slice of IntValue
+type FloatValues32 []float32
+
+func (i FloatValues32) Data() []Data {
+	d := make([]Data, len(i))
+	for j := range i {
+		d[j] = FloatValue32(i[j])
+	}
+	return d
+}
+
+// FloatValue64 type alias for int
+type FloatValue64 int32
+
+// Int casts and returns int value
+func (i FloatValue64) Int() int {
+	return int(i)
+}
+
+// Int32 casts and returns Int32 value
+func (i FloatValue64) Int32() int32 {
+	return int32(i)
+}
+
+// Int64 casts and returns Int64 value
+func (i FloatValue64) Int64() int64 {
+	return int64(i)
+}
+
+// Float32 casts and returns Float32 value
+func (i FloatValue64) Float32() float32 {
+	return float32(i)
+}
+
+// Float64 casts and returns Float64 value
+func (i FloatValue64) Float64() float64 {
+	return float64(i)
+}
+
+// String casts and returns string value
+func (i FloatValue64) String() string {
+	return strconv.FormatFloat(float64(i), 'f', -1, 64)
+}
+
+// FloatValues64 type alias for a slice of IntValue
+type FloatValues64 []float32
+
+func (i FloatValues64) Data() []Data {
+	d := make([]Data, len(i))
+	for j := range i {
+		d[j] = FloatValue64(i[j])
+	}
+	return d
+}
+
 // StringValue type alias for string
 type StringValue string
 

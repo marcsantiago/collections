@@ -51,6 +51,22 @@ func TestCounter(t *testing.T) {
 			want: IntMap64{2: 2, 3: 1, 4: 3, 10: 1, 11: 2},
 		},
 		{
+			name: "should count float32 slice without type passed in",
+			args: args{
+				data:         collections.FloatValues32{2.0, 2.0, 3.0, 4.0, 4.0, 4.0, 10.0, 11.0, 11.0}.Data(),
+				optionalType: nil,
+			},
+			want: FloatMap32{2.0: 2.0, 3.0: 1, 4.0: 3, 10.0: 1, 11.0: 2},
+		},
+		{
+			name: "should count float64 slice without type passed in",
+			args: args{
+				data:         collections.FloatValues64{2.0, 2.0, 3.0, 4.0, 4.0, 4.0, 10.0, 11.0, 11.0}.Data(),
+				optionalType: nil,
+			},
+			want: FloatMap64{2.0: 2.0, 3.0: 1, 4.0: 3, 10.0: 1, 11.0: 2},
+		},
+		{
 			name: "should count string slice without type passed in",
 			args: args{
 				data:         collections.StringValues{"2", "2", "3", "4", "4", "4", "10", "11", "11"}.Data(),
@@ -63,7 +79,25 @@ func TestCounter(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			c := Counter(tt.args.data, tt.args.optionalType...)
 			if !cmp.Equal(tt.want, c) {
-				t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, c))
+				// special rules for floats
+				_, ok := tt.want.(FloatMap32)
+				_, ok2 := tt.want.(FloatMap64)
+				if !ok && !ok2 {
+					t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, c))
+				} else {
+					got, ok := c.(FloatMap32)
+					got2, ok2 := c.(FloatMap64)
+					if ok {
+						if !cmp.Equal(tt.want, got) {
+							t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, got))
+						}
+					}
+					if ok2 {
+						if !cmp.Equal(tt.want, got2) {
+							t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, got2))
+						}
+					}
+				}
 			}
 		})
 	}
@@ -82,13 +116,13 @@ func TestCounter_MostCommon(t *testing.T) {
 		{
 			name: "should count int slice with type passed in and get the 3 most common",
 			args: args{
-				data:         collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11}.Data(),
+				data:         collections.IntValues{2, 2, 3, 4, 4, 4, 10, 11, 11, 11, 11}.Data(),
 				optionalType: []collections.Type{collections.IntSliceType},
 			},
 			want: []collections.Element{
+				{Key: collections.IntValue(11), Value: collections.IntValue(4)},
 				{Key: collections.IntValue(4), Value: collections.IntValue(3)},
 				{Key: collections.IntValue(2), Value: collections.IntValue(2)},
-				{Key: collections.IntValue(11), Value: collections.IntValue(2)},
 			},
 		},
 	}
@@ -99,7 +133,7 @@ func TestCounter_MostCommon(t *testing.T) {
 			sort.Sort(collections.ElementsByValueIntDesc(elements))
 			sort.Sort(collections.ElementsByValueIntDesc(tt.want))
 			if !cmp.Equal(tt.want, elements) {
-				t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, elements))
+				t.Fatalf("Counter_MostCommon() got values are not expected diff\n%+v", cmp.Diff(tt.want, elements))
 			}
 		})
 	}

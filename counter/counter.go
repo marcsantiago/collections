@@ -12,6 +12,7 @@ import (
 // e.g []int, []int32, []int64, []float32, []float64, []bool, []string
 func Counter(data []collections.Data, optionalType ...collections.Type) collections.CounterMap {
 	var hash collections.CounterMap
+
 	specifiedType := collections.UnknownType
 	if len(optionalType) > 0 {
 		specifiedType = optionalType[0]
@@ -28,6 +29,10 @@ func Counter(data []collections.Data, optionalType ...collections.Type) collecti
 		hash = make(IntMap32)
 	case collections.Int64SliceType:
 		hash = make(IntMap64)
+	case collections.Float32SliceType:
+		hash = make(FloatMap32)
+	case collections.Float64SliceType:
+		hash = make(FloatMap64)
 	case collections.StringSliceType:
 		hash = make(StringMap)
 	case collections.UnknownType:
@@ -55,8 +60,10 @@ func determineDataType(data collections.Data) collections.Type {
 		return collections.Int32SliceType
 	case reflect.Int64:
 		return collections.Int64SliceType
-	case reflect.Float32, reflect.Float64:
-		return collections.UnknownType
+	case reflect.Float32:
+		return collections.Float32SliceType
+	case reflect.Float64:
+		return collections.Float64SliceType
 	case reflect.String:
 		return collections.StringSliceType
 	}

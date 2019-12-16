@@ -7,8 +7,7 @@ const (
 	IntSliceType
 	Int32SliceType
 	Int64SliceType
-	// not implemented as floats cannot be map keys
-	//Float32SliceType
-	//Float64SliceType
+	Float32SliceType
+	Float64SliceType
 	StringSliceType
 )
