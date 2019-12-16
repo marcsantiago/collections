@@ -35,7 +35,7 @@ func Counter(data []collections.Data, optionalType ...collections.Type) collecti
 	}
 	// sets the key and increments duplications
 	for i := 0; i < len(data); i++ {
-		hash.Set(data[i])
+		hash.Update(data[i])
 	}
 
 	return hash
