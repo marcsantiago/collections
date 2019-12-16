@@ -9,6 +9,19 @@ import (
 
 type IntMap map[int]int
 
+// NewIntMap takes in hash data, counts, and returns a concrete type that implements a CounterMap
+func NewIntMap(hash map[int]int) IntMap {
+	var nh IntMap
+	if hash != nil {
+		nh = make(IntMap)
+		for key := range hash {
+			nh.Update(collections.IntValue(key))
+		}
+	}
+	// return an empty Map ready for use
+	return IntMap(hash)
+}
+
 // Get retrieves a data value from the internal map if it exists
 func (i IntMap) Get(key collections.Data) (collections.Data, bool) {
 	val, ok := i[key.Int()]

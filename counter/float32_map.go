@@ -10,6 +10,19 @@ import (
 
 type FloatMap32 map[float32]int
 
+// NewFloatMap32 takes in hash data, counts, and returns a concrete type that implements a CounterMap
+func NewFloatMap32(hash map[float32]int) FloatMap32 {
+	var nh FloatMap32
+	if hash != nil {
+		nh = make(FloatMap32)
+		for key := range hash {
+			nh.Update(collections.FloatValue32(key))
+		}
+	}
+	// return an empty Map ready for use
+	return FloatMap32(hash)
+}
+
 // Get retrieves a data value from the internal map if it exists
 func (i FloatMap32) Get(key collections.Data) (collections.Data, bool) {
 	val, ok := i[key.Float32()]

@@ -9,6 +9,19 @@ import (
 
 type StringMap map[string]int
 
+// NewStringMap takes in hash data, counts, and returns a concrete type that implements a CounterMap
+func NewStringMap(hash map[string]int) StringMap {
+	var nh StringMap
+	if hash != nil {
+		nh = make(StringMap)
+		for key := range hash {
+			nh.Update(collections.StringValue(key))
+		}
+	}
+	// return an empty Map ready for use
+	return StringMap(hash)
+}
+
 // Get retrieves a data value from the internal map if it exists
 func (i StringMap) Get(key collections.Data) (collections.Data, bool) {
 	val, ok := i[key.String()]

@@ -9,6 +9,19 @@ import (
 
 type IntMap32 map[int32]int
 
+// NewIntMap32 takes in hash data, counts, and returns a concrete type that implements a CounterMap
+func NewIntMap32(hash map[int32]int) IntMap32 {
+	var nh IntMap32
+	if hash != nil {
+		nh = make(IntMap32)
+		for key := range hash {
+			nh.Update(collections.IntValue32(key))
+		}
+	}
+	// return an empty Map ready for use
+	return IntMap32(hash)
+}
+
 // Get retrieves a data value from the internal map if it exists
 func (i IntMap32) Get(key collections.Data) (collections.Data, bool) {
 	val, ok := i[key.Int32()]

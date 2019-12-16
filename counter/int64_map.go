@@ -9,6 +9,19 @@ import (
 
 type IntMap64 map[int64]int
 
+// NewIntMap64 takes in hash data, counts, and returns a concrete type that implements a CounterMap
+func NewIntMap64(hash map[int64]int) IntMap64 {
+	var nh IntMap64
+	if hash != nil {
+		nh = make(IntMap64)
+		for key := range hash {
+			nh.Update(collections.IntValue64(key))
+		}
+	}
+	// return an empty Map ready for use
+	return IntMap64(hash)
+}
+
 // Get retrieves a data value from the internal map if it exists
 func (i IntMap64) Get(key collections.Data) (collections.Data, bool) {
 	val, ok := i[key.Int64()]
