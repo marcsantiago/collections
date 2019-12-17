@@ -135,7 +135,7 @@ func (i IntValues64) Data() []Data {
 }
 
 // FloatValue32 type alias for int
-type FloatValue32 int32
+type FloatValue32 float32
 
 // Int casts and returns int value
 func (i FloatValue32) Int() int {
@@ -179,7 +179,7 @@ func (i FloatValues32) Data() []Data {
 }
 
 // FloatValue64 type alias for int
-type FloatValue64 int32
+type FloatValue64 float64
 
 // Int casts and returns int value
 func (i FloatValue64) Int() int {

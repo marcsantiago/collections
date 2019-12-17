@@ -79,25 +79,7 @@ func TestCounter(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			c := Counter(tt.args.data, tt.args.optionalType...)
 			if !cmp.Equal(tt.want, c) {
-				// special rules for floats
-				_, ok := tt.want.(FloatMap32)
-				_, ok2 := tt.want.(FloatMap64)
-				if !ok && !ok2 {
-					t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, c))
-				} else {
-					got, ok := c.(FloatMap32)
-					got2, ok2 := c.(FloatMap64)
-					if ok {
-						if !cmp.Equal(tt.want, got) {
-							t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, got))
-						}
-					}
-					if ok2 {
-						if !cmp.Equal(tt.want, got2) {
-							t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, got2))
-						}
-					}
-				}
+				t.Fatalf("Counter() got values are not expected diff\n%+v", cmp.Diff(tt.want, c))
 			}
 		})
 	}
