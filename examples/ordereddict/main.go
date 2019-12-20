@@ -26,4 +26,6 @@ func main() {
 		fmt.Println("after changes", "key", elem.Key, "value", elem.Value)
 	}
 	fmt.Println(od)
+	od.Reverse()
+	fmt.Println(od)
 }

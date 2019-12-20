@@ -69,6 +69,13 @@ func (o OrderedDict) Iterate() <-chan collections.Element {
 	return ch
 }
 
+func (o OrderedDict) Reverse() {
+	for i := len(o.keys)/2 - 1; i >= 0; i-- {
+		opp := len(o.keys) - 1 - i
+		o.keys[i], o.keys[opp] = o.keys[opp], o.keys[i]
+	}
+}
+
 func (o OrderedDict) String() string {
 	var buf bytes.Buffer
 	buf.WriteString("OrderedDict([")
