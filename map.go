@@ -10,11 +10,3 @@ type CounterMap interface {
 	Subtract(value Data)
 	Update(value Data)
 }
-
-type OrderedMap interface {
-	Iterable
-	Delete(key Data)
-	Get(key Data) (Data, bool)
-	Set(key Data, value Data)
-	String() string
-}
