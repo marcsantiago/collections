@@ -1,7 +1,9 @@
 package collections
 
+// Type is a type alias for an int used for the  "ENUM" definition below
 type Type int
 
+// Collection supported types
 const (
 	UnknownType Type = iota
 	IntType

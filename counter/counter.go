@@ -7,7 +7,7 @@ import (
 )
 
 // Counter is a python like abstraction on counting slice data
-// passing in a single optionalType for type means 0 type reflection is needed
+// passing in a single optionalType for type means zero type reflection is needed
 // while collection.Data is an interface, it is expected that all elements are of the same primitive underneath
 // e.g []int, []int32, []int64, []float32, []float64, []bool, []string
 func Counter(data []collections.Data, optionalType ...collections.Type) collections.CounterMap {
@@ -36,7 +36,7 @@ func Counter(data []collections.Data, optionalType ...collections.Type) collecti
 	case collections.StringSliceType:
 		hash = make(StringMap)
 	case collections.UnknownType:
-		// if the type cannot be found then we return panic
+		// if the type cannot be found then we panic
 		// this is not very Go like, since no error is returned
 		// however by design we are trying to emulate how python's Counter object would behave
 		panic("slice type could not be determined")

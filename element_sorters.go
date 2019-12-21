@@ -1,5 +1,6 @@
 package collections
 
+// Element represents (key, value) with backed by the Data interface
 type Element struct {
 	Key   Data
 	Value Data

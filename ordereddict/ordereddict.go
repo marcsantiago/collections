@@ -15,6 +15,7 @@ type OrderedDict struct {
 	valueType collections.Type
 }
 
+// OrderedDict returns a map initialized structure
 func New() OrderedDict {
 	return OrderedDict{
 		hash:      make(map[collections.Data]collections.Data),
@@ -23,12 +24,14 @@ func New() OrderedDict {
 	}
 }
 
+// Get retrieves a data value from the internal map if it exists
 func (o OrderedDict) Get(key collections.Data) (collections.Data, bool) {
 	val, ok := o.hash[key]
 	return val, ok
 }
 
-func (o OrderedDict) Delete(key collections.Data) {
+// Delete removes the element from the internal map and the backing slice that records order
+func (o *OrderedDict) Delete(key collections.Data) {
 	if _, ok := o.hash[key]; !ok || len(o.hash) == 0 {
 		return
 	}
@@ -41,9 +44,11 @@ func (o OrderedDict) Delete(key collections.Data) {
 			break
 		}
 	}
+	//o.keys = append(o.keys[:i], o.keys[i+1:]...)
 	o.keys = o.keys[:i+copy(o.keys[i:], o.keys[i+1:])]
 }
 
+// Set updates the internal map and backing slice that records order
 func (o *OrderedDict) Set(key collections.Data, value collections.Data) {
 	if _, ok := o.hash[key]; ok {
 		return
@@ -58,6 +63,7 @@ func (o *OrderedDict) Set(key collections.Data, value collections.Data) {
 	o.keys = append(o.keys, key)
 }
 
+// Iterate creates a channel to create an iterator for he Go range statement
 func (o OrderedDict) Iterate() <-chan collections.Element {
 	ch := make(chan collections.Element)
 	go func() {
@@ -69,6 +75,7 @@ func (o OrderedDict) Iterate() <-chan collections.Element {
 	return ch
 }
 
+// Reverse does an inplace reverse sort of the backing slice
 func (o OrderedDict) Reverse() {
 	for i := len(o.keys)/2 - 1; i >= 0; i-- {
 		opp := len(o.keys) - 1 - i
@@ -76,6 +83,7 @@ func (o OrderedDict) Reverse() {
 	}
 }
 
+// String creates an OrderedDict representation of the internal map data
 func (o OrderedDict) String() string {
 	var buf bytes.Buffer
 	buf.WriteString("OrderedDict([")
@@ -92,6 +100,7 @@ func (o OrderedDict) String() string {
 	return buf.String()
 }
 
+// determineDataType gets the internal data type converts it to a supported collections type
 func determineDataType(data collections.Data) collections.Type {
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Int:
@@ -110,9 +119,10 @@ func determineDataType(data collections.Data) collections.Type {
 	return collections.UnknownType
 }
 
+// encode writes data into a bytes buffer, used in the String method
 func encode(encoder *bytes.Buffer, data collections.Data, t collections.Type) {
 	// rip for optimization
-	const size = 10
+	const size = 0
 	b := make([]byte, size)
 	switch t {
 	case collections.IntType, collections.Int32Type, collections.Int64Type:

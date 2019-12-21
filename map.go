@@ -1,5 +1,6 @@
 package collections
 
+// CounterMap mimics the Python Counter definitions
 type CounterMap interface {
 	Iterable
 	Delete(value Data)

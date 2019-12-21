@@ -28,11 +28,12 @@ func (i StringMap) Get(key collections.Data) (collections.Data, bool) {
 	return collections.StringValue(val), ok
 }
 
-// Update updates the counter for a value or sets it if it does not exist
+// Update updates the counter for a value or sets the value it if it does not exist
 func (i StringMap) Update(key collections.Data) {
 	i[key.String()]++
 }
 
+// Subtract removes 1 from the counter if the key exists
 func (i StringMap) Subtract(key collections.Data) {
 	_, ok := i[key.String()]
 	if ok {
@@ -40,9 +41,9 @@ func (i StringMap) Subtract(key collections.Data) {
 	}
 }
 
-// Delete removes a value from the map by it's key
-func (i StringMap) Delete(value collections.Data) {
-	delete(i, value.String())
+// Delete removes the element from the internal map
+func (i StringMap) Delete(key collections.Data) {
+	delete(i, key.String())
 }
 
 // Items returns the internal map as a set of elements

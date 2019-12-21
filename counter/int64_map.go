@@ -28,11 +28,12 @@ func (i IntMap64) Get(key collections.Data) (collections.Data, bool) {
 	return collections.IntValue64(val), ok
 }
 
-// Update updates the counter for a value or sets it if it does not exist
+// Update updates the counter for a value or sets the value it if it does not exist
 func (i IntMap64) Update(key collections.Data) {
 	i[key.Int64()]++
 }
 
+// Subtract removes 1 from the counter if the key exists
 func (i IntMap64) Subtract(key collections.Data) {
 	_, ok := i[key.Int64()]
 	if ok {
@@ -40,9 +41,9 @@ func (i IntMap64) Subtract(key collections.Data) {
 	}
 }
 
-// Delete removes a value from the map by it's key
-func (i IntMap64) Delete(value collections.Data) {
-	delete(i, value.Int64())
+// Delete removes the element from the internal map
+func (i IntMap64) Delete(key collections.Data) {
+	delete(i, key.Int64())
 }
 
 // Items returns the internal map as a set of elements

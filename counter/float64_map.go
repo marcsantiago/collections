@@ -29,11 +29,12 @@ func (i FloatMap64) Get(key collections.Data) (collections.Data, bool) {
 	return collections.FloatValue64(val), ok
 }
 
-// Update updates the counter for a value or sets it if it does not exist
+// Update updates the counter for a value or sets the value it if it does not exist
 func (i FloatMap64) Update(key collections.Data) {
 	i[key.Float64()]++
 }
 
+// Subtract removes 1 from the counter if the key exists
 func (i FloatMap64) Subtract(key collections.Data) {
 	_, ok := i[key.Float64()]
 	if ok {
@@ -41,9 +42,9 @@ func (i FloatMap64) Subtract(key collections.Data) {
 	}
 }
 
-// Delete removes a value from the map by it's key
-func (i FloatMap64) Delete(value collections.Data) {
-	delete(i, value.Float64())
+// Delete removes the element from the internal map
+func (i FloatMap64) Delete(key collections.Data) {
+	delete(i, key.Float64())
 }
 
 // Items returns the internal map as a set of elements
@@ -88,7 +89,7 @@ func (i FloatMap64) MostCommon(n int) []collections.Element {
 }
 
 // String returns the JSON string representation of the map data
-// maps with float keys do not marshal well so the keys are converted to strings
+// maps with float keys are not valid JSON, so the keys are converted to strings
 func (i FloatMap64) String() string {
 	m := make(map[string]int)
 	for key, value := range i {

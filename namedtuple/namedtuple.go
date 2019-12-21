@@ -24,13 +24,14 @@ func New(labels ...string) NamedTuple {
 	return nt
 }
 
-// Add adds internally, order does matter should mirror the order the labels were inputted
+// Add appends to the internal slice.
+// Order does matter and should mirror the order the labels were inputted
 func (n NamedTuple) Add(row []collections.Data) NamedTuple {
 	n.elements = append(n.elements, row)
 	return n
 }
 
-// Get retrieves a value from the internal data
+// Get retrieves a value from the internal slice
 func (n NamedTuple) Get(rowN int, label string) collections.Data {
 	i, ok := n.labels[label]
 	if !ok {
@@ -44,11 +45,11 @@ func (n NamedTuple) Len() int {
 	return len(n.elements)
 }
 
-// Reset empties the labels and internal rows of data, while keeping the internal slice size for potential reuse without
+// Reset empties the labels and internal rows of data. The internal slice size is kept for potential reuse without
 // slice reallocation
 func (n *NamedTuple) Reset() {
 	n.labels = make(map[string]int)
-	n.elements = n.elements[:]
+	n.elements = n.elements[:][:]
 }
 
 // String prints out the data in CSV format
