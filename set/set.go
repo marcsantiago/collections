@@ -168,7 +168,7 @@ func (s Set) SymmetricDifference(ss Set) Set {
 }
 
 // SymmetricDifferenceUpdate updates the current set to contains all items from both set, but not the items that are present in both sets
-func (s Set) SymmetricDifferenceUpdate(ss Set) Set {
+func (s Set) SymmetricDifferenceUpdate(ss Set) {
 	for item := range ss {
 		if s.Contains(item) {
 			delete(s, item)
@@ -176,7 +176,6 @@ func (s Set) SymmetricDifferenceUpdate(ss Set) Set {
 		}
 		s.Add(item)
 	}
-	return s
 }
 
 // Union returns a set that contains all items from the original set, and all items from the specified sets.
