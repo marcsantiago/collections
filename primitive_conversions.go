@@ -270,3 +270,47 @@ func (s StringValues) Data() []Data {
 	}
 	return d
 }
+
+// RuneValue type alias for rune
+type RuneValue rune
+
+// Int casts and returns int value
+func (s RuneValue) Int() int {
+	return int(s)
+}
+
+// Int32 casts and returns Int32 value
+func (s RuneValue) Int32() int32 {
+	return int32(s)
+}
+
+// Int64 casts and returns Int64 value
+func (s RuneValue) Int64() int64 {
+	return int64(s)
+}
+
+// Float32 casts and returns Float32 value
+func (s RuneValue) Float32() float32 {
+	return float32(s)
+}
+
+// Float64 casts and returns Float64 value
+func (s RuneValue) Float64() float64 {
+	return float64(s)
+}
+
+// String casts and returns string value
+func (s RuneValue) String() string {
+	return string(s)
+}
+
+// RuneValues type alias for a slice of RuneValue
+type RuneValues []rune
+
+func (s RuneValues) Data() []Data {
+	d := make([]Data, len(s))
+	for j := range s {
+		d[j] = RuneValue(s[j])
+	}
+	return d
+}
