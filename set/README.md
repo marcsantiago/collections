@@ -14,6 +14,13 @@ Package set is a Go parody of the Pythons set implementation and set methods
 
 ## <a name="pkg-index">Index</a>
 * [type Set](#Set)
+  * [func ConvertFloat32Slice(s []float32) Set](#ConvertFloat32Slice)
+  * [func ConvertFloat64Slice(s []float64) Set](#ConvertFloat64Slice)
+  * [func ConvertInt32Slice(s []int32) Set](#ConvertInt32Slice)
+  * [func ConvertInt64Slice(s []int64) Set](#ConvertInt64Slice)
+  * [func ConvertIntSlice(s []int) Set](#ConvertIntSlice)
+  * [func ConvertRuneSlice(s []rune) Set](#ConvertRuneSlice)
+  * [func ConvertStringSlice(s []string) Set](#ConvertStringSlice)
   * [func New() Set](#New)
   * [func (s Set) Add(data collections.Data)](#Set.Add)
   * [func (s Set) Clear()](#Set.Clear)
@@ -37,7 +44,7 @@ Package set is a Go parody of the Pythons set implementation and set methods
 
 
 #### <a name="pkg-files">Package files</a>
-[doc.go](/src/github.com/marcsantiago/collections/set/doc.go) [set.go](/src/github.com/marcsantiago/collections/set/set.go) 
+[doc.go](/src/github.com/marcsantiago/collections/set/doc.go) [set-conversions.go](/src/github.com/marcsantiago/collections/set/set-conversions.go) [set.go](/src/github.com/marcsantiago/collections/set/set.go) 
 
 
 
@@ -52,6 +59,55 @@ type Set map[collections.Data]struct{}
 
 
 
+
+
+### <a name="ConvertFloat32Slice">func</a> [ConvertFloat32Slice](/src/target/set-conversions.go?s=664:705#L33)
+``` go
+func ConvertFloat32Slice(s []float32) Set
+```
+ConvertFloat32Slice converts a float32 slice to a set
+
+
+### <a name="ConvertFloat64Slice">func</a> [ConvertFloat64Slice](/src/target/set-conversions.go?s=860:901#L42)
+``` go
+func ConvertFloat64Slice(s []float64) Set
+```
+ConvertFloat64Slice converts a float64 slice to a set
+
+
+### <a name="ConvertInt32Slice">func</a> [ConvertInt32Slice](/src/target/set-conversions.go?s=288:325#L15)
+``` go
+func ConvertInt32Slice(s []int32) Set
+```
+ConvertInt32Slice converts a int32 slice to a set
+
+
+### <a name="ConvertInt64Slice">func</a> [ConvertInt64Slice](/src/target/set-conversions.go?s=474:511#L24)
+``` go
+func ConvertInt64Slice(s []int64) Set
+```
+ConvertInt64Slice converts a int64 slice to a set
+
+
+### <a name="ConvertIntSlice">func</a> [ConvertIntSlice](/src/target/set-conversions.go?s=108:141#L6)
+``` go
+func ConvertIntSlice(s []int) Set
+```
+ConvertIntSlice converts a int slice to a set
+
+
+### <a name="ConvertRuneSlice">func</a> [ConvertRuneSlice](/src/target/set-conversions.go?s=1241:1276#L60)
+``` go
+func ConvertRuneSlice(s []rune) Set
+```
+ConvertRuneSlice converts a rune slice to a set
+
+
+### <a name="ConvertStringSlice">func</a> [ConvertStringSlice](/src/target/set-conversions.go?s=1054:1093#L51)
+``` go
+func ConvertStringSlice(s []string) Set
+```
+ConvertStringSlice converts a string slice to a set
 
 
 ### <a name="New">func</a> [New](/src/target/set.go?s=170:184#L14)
