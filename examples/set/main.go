@@ -23,4 +23,13 @@ func main() {
 	fmt.Println("Y", y)
 	fmt.Println("intersection", intersect)
 
+	alphabet := []rune("abcdefghijklmnopqrstuvwxyz ")
+	word := "hello world"
+	alphaSet := set.ConvertRuneSlice(alphabet)
+	wordSet := set.ConvertRuneSlice([]rune(word))
+
+	if wordSet.IsSubset(alphaSet) {
+		fmt.Printf("\"%s\" seems like english", word)
+	}
+
 }
