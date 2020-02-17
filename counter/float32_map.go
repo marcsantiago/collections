@@ -34,6 +34,14 @@ func (i FloatMap32) Update(key collections.Data) {
 	i[key.Float32()]++
 }
 
+// Set replaces a keys counter data with another integer
+func (i FloatMap32) Set(key collections.Data, value collections.Data) {
+	_, ok := i[key.Float32()]
+	if ok {
+		i[key.Float32()] = value.Int()
+	}
+}
+
 // Subtract removes 1 from the counter if the key exists
 func (i FloatMap32) Subtract(key collections.Data) {
 	_, ok := i[key.Float32()]

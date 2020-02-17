@@ -33,6 +33,14 @@ func (i IntMap) Update(key collections.Data) {
 	i[key.Int()]++
 }
 
+// Set replaces a keys counter data with another integer
+func (i IntMap) Set(key collections.Data, value collections.Data) {
+	_, ok := i[key.Int()]
+	if ok {
+		i[key.Int()] = value.Int()
+	}
+}
+
 // Subtract removes 1 from the counter if the key exists
 func (i IntMap) Subtract(key collections.Data) {
 	_, ok := i[key.Int()]
