@@ -28,6 +28,11 @@ func (i IntMap) Get(key collections.Data) (collections.Data, bool) {
 	return collections.IntValue(val), ok
 }
 
+// Len returns the number of stored keys
+func (i IntMap) Len() int {
+	return len(i)
+}
+
 // Update updates the counter for a value or sets the value it if it does not exist
 func (i IntMap) Update(key collections.Data) {
 	i[key.Int()]++

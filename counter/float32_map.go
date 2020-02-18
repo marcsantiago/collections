@@ -29,6 +29,11 @@ func (i FloatMap32) Get(key collections.Data) (collections.Data, bool) {
 	return collections.FloatValue32(val), ok
 }
 
+// Len returns the number of stored keys
+func (i FloatMap32) Len() int {
+	return len(i)
+}
+
 // Update updates the counter for a value or sets the value it if it does not exist
 func (i FloatMap32) Update(key collections.Data) {
 	i[key.Float32()]++
