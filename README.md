@@ -2,9 +2,6 @@
 
 # collections
 `import "github.com/marcsantiago/collections"`
-### [![Test Status](https://github.com/marcsantiago/collections/workflows/Go/badge.svg)](go)
-#
-parody of some of the basic python core features
 
 * [Overview](#pkg-overview)
 * [Index](#pkg-index)
@@ -68,6 +65,15 @@ parody of some of the basic python core features
   * [func (i FloatValues32) Data() []Data](#FloatValues32.Data)
 * [type FloatValues64](#FloatValues64)
   * [func (i FloatValues64) Data() []Data](#FloatValues64.Data)
+* [type GenericMap](#GenericMap)
+  * [func NewGenericMap() GenericMap](#NewGenericMap)
+  * [func (i GenericMap) Delete(key Data)](#GenericMap.Delete)
+  * [func (i GenericMap) Get(key Data) (Data, bool)](#GenericMap.Get)
+  * [func (i GenericMap) Items() []Element](#GenericMap.Items)
+  * [func (i GenericMap) Iterate() &lt;-chan Element](#GenericMap.Iterate)
+  * [func (i GenericMap) Len() int](#GenericMap.Len)
+  * [func (i GenericMap) Set(key Data, value Data)](#GenericMap.Set)
+  * [func (i GenericMap) String() string](#GenericMap.String)
 * [type IntValue](#IntValue)
   * [func (i IntValue) Float32() float32](#IntValue.Float32)
   * [func (i IntValue) Float64() float64](#IntValue.Float64)
@@ -96,6 +102,16 @@ parody of some of the basic python core features
 * [type IntValues64](#IntValues64)
   * [func (i IntValues64) Data() []Data](#IntValues64.Data)
 * [type Iterable](#Iterable)
+* [type Map](#Map)
+* [type RuneValue](#RuneValue)
+  * [func (s RuneValue) Float32() float32](#RuneValue.Float32)
+  * [func (s RuneValue) Float64() float64](#RuneValue.Float64)
+  * [func (s RuneValue) Int() int](#RuneValue.Int)
+  * [func (s RuneValue) Int32() int32](#RuneValue.Int32)
+  * [func (s RuneValue) Int64() int64](#RuneValue.Int64)
+  * [func (s RuneValue) String() string](#RuneValue.String)
+* [type RuneValues](#RuneValues)
+  * [func (s RuneValues) Data() []Data](#RuneValues.Data)
 * [type StringValue](#StringValue)
   * [func (s StringValue) Float32() float32](#StringValue.Float32)
   * [func (s StringValue) Float64() float64](#StringValue.Float64)
@@ -109,27 +125,30 @@ parody of some of the basic python core features
 
 
 #### <a name="pkg-files">Package files</a>
-[data.go](/src/github.com/marcsantiago/collections/data.go) [element_sorters.go](/src/github.com/marcsantiago/collections/element_sorters.go) [interable.go](/src/github.com/marcsantiago/collections/interable.go) [map.go](/src/github.com/marcsantiago/collections/map.go) [primitive_conversions.go](/src/github.com/marcsantiago/collections/primitive_conversions.go) [types.go](/src/github.com/marcsantiago/collections/types.go) 
+[data.go](/src/github.com/marcsantiago/collections/data.go) [element_sorters.go](/src/github.com/marcsantiago/collections/element_sorters.go) [generic_map.go](/src/github.com/marcsantiago/collections/generic_map.go) [interable.go](/src/github.com/marcsantiago/collections/interable.go) [map.go](/src/github.com/marcsantiago/collections/map.go) [primitive_conversions.go](/src/github.com/marcsantiago/collections/primitive_conversions.go) [types.go](/src/github.com/marcsantiago/collections/types.go) 
 
 
 
 
 
 
-## <a name="CounterMap">type</a> [CounterMap](/src/target/map.go?s=73:267#L4)
+## <a name="CounterMap">type</a> [CounterMap](/src/target/map.go?s=165:395#L5)
 ``` go
 type CounterMap interface {
     Iterable
-    Delete(value Data)
+    Delete(key Data)
     Get(key Data) (Data, bool)
+    Len() int
     Items() []Element
     MostCommon(n int) []Element
+    Set(key Data, value Data)
     String() string
     Subtract(value Data)
     Update(value Data)
 }
 ```
 CounterMap mimics the Python Counter definitions
+this also implements the collections.Map interface to be able to convert into a ChainMap
 
 
 
@@ -650,6 +669,89 @@ func (i FloatValues64) Data() []Data
 
 
 
+## <a name="GenericMap">type</a> [GenericMap](/src/target/generic_map.go?s=128:157#L8)
+``` go
+type GenericMap map[Data]Data
+```
+GenericMap is the default implementation of a map using the Data interface
+
+
+
+
+
+
+
+### <a name="NewGenericMap">func</a> [NewGenericMap](/src/target/generic_map.go?s=159:190#L10)
+``` go
+func NewGenericMap() GenericMap
+```
+
+
+
+
+### <a name="GenericMap.Delete">func</a> (GenericMap) [Delete](/src/target/generic_map.go?s=635:671#L31)
+``` go
+func (i GenericMap) Delete(key Data)
+```
+Delete removes the element from the internal map
+
+
+
+
+### <a name="GenericMap.Get">func</a> (GenericMap) [Get](/src/target/generic_map.go?s=286:332#L15)
+``` go
+func (i GenericMap) Get(key Data) (Data, bool)
+```
+Get retrieves a data value from the internal map if it exists
+
+
+
+
+### <a name="GenericMap.Items">func</a> (GenericMap) [Items](/src/target/generic_map.go?s=748:785#L36)
+``` go
+func (i GenericMap) Items() []Element
+```
+Items returns the internal map as a set of elements
+
+
+
+
+### <a name="GenericMap.Iterate">func</a> (GenericMap) [Iterate](/src/target/generic_map.go?s=1021:1065#L48)
+``` go
+func (i GenericMap) Iterate() <-chan Element
+```
+Iterate creates a channel to create an iterator for he Go range statement
+
+
+
+
+### <a name="GenericMap.Len">func</a> (GenericMap) [Len](/src/target/generic_map.go?s=414:443#L21)
+``` go
+func (i GenericMap) Len() int
+```
+Len returns the number of stored keys
+
+
+
+
+### <a name="GenericMap.Set">func</a> (GenericMap) [Set](/src/target/generic_map.go?s=516:561#L26)
+``` go
+func (i GenericMap) Set(key Data, value Data)
+```
+Set adds a key value pairing to the internal map
+
+
+
+
+### <a name="GenericMap.String">func</a> (GenericMap) [String](/src/target/generic_map.go?s=1278:1313#L60)
+``` go
+func (i GenericMap) String() string
+```
+String returns the JSON string representation of the map data
+
+
+
+
 ## <a name="IntValue">type</a> [IntValue](/src/target/primitive_conversions.go?s=70:87#L6)
 ``` go
 type IntValue int
@@ -937,6 +1039,120 @@ Iterable is anything that can be ranged on
 
 
 
+
+
+
+## <a name="Map">type</a> [Map](/src/target/map.go?s=421:573#L19)
+``` go
+type Map interface {
+    Iterable
+    Delete(key Data)
+    Get(key Data) (Data, bool)
+    Len() int
+    Set(key Data, value Data)
+    String() string
+    Items() []Element
+}
+```
+Map is a genetic map
+
+
+
+
+
+
+
+
+
+
+## <a name="RuneValue">type</a> [RuneValue](/src/target/primitive_conversions.go?s=5452:5471#L275)
+``` go
+type RuneValue rune
+```
+RuneValue type alias for rune
+
+
+
+
+
+
+
+
+
+
+### <a name="RuneValue.Float32">func</a> (RuneValue) [Float32](/src/target/primitive_conversions.go?s=5788:5824#L293)
+``` go
+func (s RuneValue) Float32() float32
+```
+Float32 casts and returns Float32 value
+
+
+
+
+### <a name="RuneValue.Float64">func</a> (RuneValue) [Float64](/src/target/primitive_conversions.go?s=5892:5928#L298)
+``` go
+func (s RuneValue) Float64() float64
+```
+Float64 casts and returns Float64 value
+
+
+
+
+### <a name="RuneValue.Int">func</a> (RuneValue) [Int](/src/target/primitive_conversions.go?s=5508:5536#L278)
+``` go
+func (s RuneValue) Int() int
+```
+Int casts and returns int value
+
+
+
+
+### <a name="RuneValue.Int32">func</a> (RuneValue) [Int32](/src/target/primitive_conversions.go?s=5596:5628#L283)
+``` go
+func (s RuneValue) Int32() int32
+```
+Int32 casts and returns Int32 value
+
+
+
+
+### <a name="RuneValue.Int64">func</a> (RuneValue) [Int64](/src/target/primitive_conversions.go?s=5690:5722#L288)
+``` go
+func (s RuneValue) Int64() int64
+```
+Int64 casts and returns Int64 value
+
+
+
+
+### <a name="RuneValue.String">func</a> (RuneValue) [String](/src/target/primitive_conversions.go?s=5994:6028#L303)
+``` go
+func (s RuneValue) String() string
+```
+String casts and returns string value
+
+
+
+
+## <a name="RuneValues">type</a> [RuneValues](/src/target/primitive_conversions.go?s=6102:6124#L308)
+``` go
+type RuneValues []rune
+```
+RuneValues type alias for a slice of RuneValue
+
+
+
+
+
+
+
+
+
+
+### <a name="RuneValues.Data">func</a> (RuneValues) [Data](/src/target/primitive_conversions.go?s=6126:6159#L310)
+``` go
+func (s RuneValues) Data() []Data
+```
 
 
 

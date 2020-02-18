@@ -28,9 +28,22 @@ func (i IntMap32) Get(key collections.Data) (collections.Data, bool) {
 	return collections.IntValue32(val), ok
 }
 
+// Len returns the number of stored keys
+func (i IntMap32) Len() int {
+	return len(i)
+}
+
 // Update updates the counter for a value or sets the value it if it does not exist
 func (i IntMap32) Update(key collections.Data) {
 	i[key.Int32()]++
+}
+
+// Set replaces a keys counter data with another integer
+func (i IntMap32) Set(key collections.Data, value collections.Data) {
+	_, ok := i[key.Int32()]
+	if ok {
+		i[key.Int32()] = value.Int()
+	}
 }
 
 // Subtract removes 1 from the counter if the key exists

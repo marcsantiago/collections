@@ -20,7 +20,9 @@ Package counter is a Go parody of the Python Counter object
   * [func (i FloatMap32) Get(key collections.Data) (collections.Data, bool)](#FloatMap32.Get)
   * [func (i FloatMap32) Items() []collections.Element](#FloatMap32.Items)
   * [func (i FloatMap32) Iterate() &lt;-chan collections.Element](#FloatMap32.Iterate)
+  * [func (i FloatMap32) Len() int](#FloatMap32.Len)
   * [func (i FloatMap32) MostCommon(n int) []collections.Element](#FloatMap32.MostCommon)
+  * [func (i FloatMap32) Set(key collections.Data, value collections.Data)](#FloatMap32.Set)
   * [func (i FloatMap32) String() string](#FloatMap32.String)
   * [func (i FloatMap32) Subtract(key collections.Data)](#FloatMap32.Subtract)
   * [func (i FloatMap32) Update(key collections.Data)](#FloatMap32.Update)
@@ -30,7 +32,9 @@ Package counter is a Go parody of the Python Counter object
   * [func (i FloatMap64) Get(key collections.Data) (collections.Data, bool)](#FloatMap64.Get)
   * [func (i FloatMap64) Items() []collections.Element](#FloatMap64.Items)
   * [func (i FloatMap64) Iterate() &lt;-chan collections.Element](#FloatMap64.Iterate)
+  * [func (i FloatMap64) Len() int](#FloatMap64.Len)
   * [func (i FloatMap64) MostCommon(n int) []collections.Element](#FloatMap64.MostCommon)
+  * [func (i FloatMap64) Set(key collections.Data, value collections.Data)](#FloatMap64.Set)
   * [func (i FloatMap64) String() string](#FloatMap64.String)
   * [func (i FloatMap64) Subtract(key collections.Data)](#FloatMap64.Subtract)
   * [func (i FloatMap64) Update(key collections.Data)](#FloatMap64.Update)
@@ -40,7 +44,9 @@ Package counter is a Go parody of the Python Counter object
   * [func (i IntMap) Get(key collections.Data) (collections.Data, bool)](#IntMap.Get)
   * [func (i IntMap) Items() []collections.Element](#IntMap.Items)
   * [func (i IntMap) Iterate() &lt;-chan collections.Element](#IntMap.Iterate)
+  * [func (i IntMap) Len() int](#IntMap.Len)
   * [func (i IntMap) MostCommon(n int) []collections.Element](#IntMap.MostCommon)
+  * [func (i IntMap) Set(key collections.Data, value collections.Data)](#IntMap.Set)
   * [func (i IntMap) String() string](#IntMap.String)
   * [func (i IntMap) Subtract(key collections.Data)](#IntMap.Subtract)
   * [func (i IntMap) Update(key collections.Data)](#IntMap.Update)
@@ -50,7 +56,9 @@ Package counter is a Go parody of the Python Counter object
   * [func (i IntMap32) Get(key collections.Data) (collections.Data, bool)](#IntMap32.Get)
   * [func (i IntMap32) Items() []collections.Element](#IntMap32.Items)
   * [func (i IntMap32) Iterate() &lt;-chan collections.Element](#IntMap32.Iterate)
+  * [func (i IntMap32) Len() int](#IntMap32.Len)
   * [func (i IntMap32) MostCommon(n int) []collections.Element](#IntMap32.MostCommon)
+  * [func (i IntMap32) Set(key collections.Data, value collections.Data)](#IntMap32.Set)
   * [func (i IntMap32) String() string](#IntMap32.String)
   * [func (i IntMap32) Subtract(key collections.Data)](#IntMap32.Subtract)
   * [func (i IntMap32) Update(key collections.Data)](#IntMap32.Update)
@@ -60,7 +68,9 @@ Package counter is a Go parody of the Python Counter object
   * [func (i IntMap64) Get(key collections.Data) (collections.Data, bool)](#IntMap64.Get)
   * [func (i IntMap64) Items() []collections.Element](#IntMap64.Items)
   * [func (i IntMap64) Iterate() &lt;-chan collections.Element](#IntMap64.Iterate)
+  * [func (i IntMap64) Len() int](#IntMap64.Len)
   * [func (i IntMap64) MostCommon(n int) []collections.Element](#IntMap64.MostCommon)
+  * [func (i IntMap64) Set(key collections.Data, value collections.Data)](#IntMap64.Set)
   * [func (i IntMap64) String() string](#IntMap64.String)
   * [func (i IntMap64) Subtract(key collections.Data)](#IntMap64.Subtract)
   * [func (i IntMap64) Update(key collections.Data)](#IntMap64.Update)
@@ -70,7 +80,9 @@ Package counter is a Go parody of the Python Counter object
   * [func (i StringMap) Get(key collections.Data) (collections.Data, bool)](#StringMap.Get)
   * [func (i StringMap) Items() []collections.Element](#StringMap.Items)
   * [func (i StringMap) Iterate() &lt;-chan collections.Element](#StringMap.Iterate)
+  * [func (i StringMap) Len() int](#StringMap.Len)
   * [func (i StringMap) MostCommon(n int) []collections.Element](#StringMap.MostCommon)
+  * [func (i StringMap) Set(key collections.Data, value collections.Data)](#StringMap.Set)
   * [func (i StringMap) String() string](#StringMap.String)
   * [func (i StringMap) Subtract(key collections.Data)](#StringMap.Subtract)
   * [func (i StringMap) Update(key collections.Data)](#StringMap.Update)
@@ -115,7 +127,7 @@ NewFloatMap32 takes in hash data, counts, and returns a concrete type that imple
 
 
 
-### <a name="FloatMap32.Delete">func</a> (FloatMap32) [Delete](/src/target/float32_map.go?s=1093:1141#L46)
+### <a name="FloatMap32.Delete">func</a> (FloatMap32) [Delete](/src/target/float32_map.go?s=1388:1436#L59)
 ``` go
 func (i FloatMap32) Delete(key collections.Data)
 ```
@@ -133,7 +145,7 @@ Get retrieves a data value from the internal map if it exists
 
 
 
-### <a name="FloatMap32.Items">func</a> (FloatMap32) [Items](/src/target/float32_map.go?s=1228:1277#L51)
+### <a name="FloatMap32.Items">func</a> (FloatMap32) [Items](/src/target/float32_map.go?s=1523:1572#L64)
 ``` go
 func (i FloatMap32) Items() []collections.Element
 ```
@@ -142,7 +154,7 @@ Items returns the internal map as a set of elements
 
 
 
-### <a name="FloatMap32.Iterate">func</a> (FloatMap32) [Iterate](/src/target/float32_map.go?s=1585:1641#L63)
+### <a name="FloatMap32.Iterate">func</a> (FloatMap32) [Iterate](/src/target/float32_map.go?s=1880:1936#L76)
 ``` go
 func (i FloatMap32) Iterate() <-chan collections.Element
 ```
@@ -151,7 +163,16 @@ Iterate creates a channel to create an iterator for he Go range statement
 
 
 
-### <a name="FloatMap32.MostCommon">func</a> (FloatMap32) [MostCommon](/src/target/float32_map.go?s=1915:1974#L75)
+### <a name="FloatMap32.Len">func</a> (FloatMap32) [Len](/src/target/float32_map.go?s=751:780#L33)
+``` go
+func (i FloatMap32) Len() int
+```
+Len returns the number of stored keys
+
+
+
+
+### <a name="FloatMap32.MostCommon">func</a> (FloatMap32) [MostCommon](/src/target/float32_map.go?s=2210:2269#L88)
 ``` go
 func (i FloatMap32) MostCommon(n int) []collections.Element
 ```
@@ -160,7 +181,16 @@ MostCommon returns the most common values by value
 
 
 
-### <a name="FloatMap32.String">func</a> (FloatMap32) [String](/src/target/float32_map.go?s=2473:2508#L93)
+### <a name="FloatMap32.Set">func</a> (FloatMap32) [Set](/src/target/float32_map.go?s=1016:1085#L43)
+``` go
+func (i FloatMap32) Set(key collections.Data, value collections.Data)
+```
+Set replaces a keys counter data with another integer
+
+
+
+
+### <a name="FloatMap32.String">func</a> (FloatMap32) [String](/src/target/float32_map.go?s=2768:2803#L106)
 ``` go
 func (i FloatMap32) String() string
 ```
@@ -170,7 +200,7 @@ maps with float keys are not valid JSON, so the keys are converted to strings
 
 
 
-### <a name="FloatMap32.Subtract">func</a> (FloatMap32) [Subtract](/src/target/float32_map.go?s=925:975#L38)
+### <a name="FloatMap32.Subtract">func</a> (FloatMap32) [Subtract](/src/target/float32_map.go?s=1220:1270#L51)
 ``` go
 func (i FloatMap32) Subtract(key collections.Data)
 ```
@@ -179,7 +209,7 @@ Subtract removes 1 from the counter if the key exists
 
 
 
-### <a name="FloatMap32.Update">func</a> (FloatMap32) [Update](/src/target/float32_map.go?s=794:842#L33)
+### <a name="FloatMap32.Update">func</a> (FloatMap32) [Update](/src/target/float32_map.go?s=885:933#L38)
 ``` go
 func (i FloatMap32) Update(key collections.Data)
 ```
@@ -208,7 +238,7 @@ NewFloatMap64 takes in hash data, counts, and returns a concrete type that imple
 
 
 
-### <a name="FloatMap64.Delete">func</a> (FloatMap64) [Delete](/src/target/float64_map.go?s=1093:1141#L46)
+### <a name="FloatMap64.Delete">func</a> (FloatMap64) [Delete](/src/target/float64_map.go?s=1388:1436#L59)
 ``` go
 func (i FloatMap64) Delete(key collections.Data)
 ```
@@ -226,7 +256,7 @@ Get retrieves a data value from the internal map if it exists
 
 
 
-### <a name="FloatMap64.Items">func</a> (FloatMap64) [Items](/src/target/float64_map.go?s=1228:1277#L51)
+### <a name="FloatMap64.Items">func</a> (FloatMap64) [Items](/src/target/float64_map.go?s=1523:1572#L64)
 ``` go
 func (i FloatMap64) Items() []collections.Element
 ```
@@ -235,7 +265,7 @@ Items returns the internal map as a set of elements
 
 
 
-### <a name="FloatMap64.Iterate">func</a> (FloatMap64) [Iterate](/src/target/float64_map.go?s=1585:1641#L63)
+### <a name="FloatMap64.Iterate">func</a> (FloatMap64) [Iterate](/src/target/float64_map.go?s=1880:1936#L76)
 ``` go
 func (i FloatMap64) Iterate() <-chan collections.Element
 ```
@@ -244,7 +274,16 @@ Iterate creates a channel to create an iterator for he Go range statement
 
 
 
-### <a name="FloatMap64.MostCommon">func</a> (FloatMap64) [MostCommon](/src/target/float64_map.go?s=1915:1974#L75)
+### <a name="FloatMap64.Len">func</a> (FloatMap64) [Len](/src/target/float64_map.go?s=751:780#L33)
+``` go
+func (i FloatMap64) Len() int
+```
+Len returns the number of stored keys
+
+
+
+
+### <a name="FloatMap64.MostCommon">func</a> (FloatMap64) [MostCommon](/src/target/float64_map.go?s=2210:2269#L88)
 ``` go
 func (i FloatMap64) MostCommon(n int) []collections.Element
 ```
@@ -253,7 +292,16 @@ MostCommon returns the most common values by value
 
 
 
-### <a name="FloatMap64.String">func</a> (FloatMap64) [String](/src/target/float64_map.go?s=2473:2508#L93)
+### <a name="FloatMap64.Set">func</a> (FloatMap64) [Set](/src/target/float64_map.go?s=1016:1085#L43)
+``` go
+func (i FloatMap64) Set(key collections.Data, value collections.Data)
+```
+Set replaces a keys counter data with another integer
+
+
+
+
+### <a name="FloatMap64.String">func</a> (FloatMap64) [String](/src/target/float64_map.go?s=2768:2803#L106)
 ``` go
 func (i FloatMap64) String() string
 ```
@@ -263,7 +311,7 @@ maps with float keys are not valid JSON, so the keys are converted to strings
 
 
 
-### <a name="FloatMap64.Subtract">func</a> (FloatMap64) [Subtract](/src/target/float64_map.go?s=925:975#L38)
+### <a name="FloatMap64.Subtract">func</a> (FloatMap64) [Subtract](/src/target/float64_map.go?s=1220:1270#L51)
 ``` go
 func (i FloatMap64) Subtract(key collections.Data)
 ```
@@ -272,7 +320,7 @@ Subtract removes 1 from the counter if the key exists
 
 
 
-### <a name="FloatMap64.Update">func</a> (FloatMap64) [Update](/src/target/float64_map.go?s=794:842#L33)
+### <a name="FloatMap64.Update">func</a> (FloatMap64) [Update](/src/target/float64_map.go?s=885:933#L38)
 ``` go
 func (i FloatMap64) Update(key collections.Data)
 ```
@@ -301,7 +349,7 @@ NewIntMap takes in hash data, counts, and returns a concrete type that implement
 
 
 
-### <a name="IntMap.Delete">func</a> (IntMap) [Delete](/src/target/int_map.go?s=1010:1054#L45)
+### <a name="IntMap.Delete">func</a> (IntMap) [Delete](/src/target/int_map.go?s=1289:1333#L58)
 ``` go
 func (i IntMap) Delete(key collections.Data)
 ```
@@ -319,7 +367,7 @@ Get retrieves a data value from the internal map if it exists
 
 
 
-### <a name="IntMap.Items">func</a> (IntMap) [Items](/src/target/int_map.go?s=1137:1182#L50)
+### <a name="IntMap.Items">func</a> (IntMap) [Items](/src/target/int_map.go?s=1416:1461#L63)
 ``` go
 func (i IntMap) Items() []collections.Element
 ```
@@ -328,7 +376,7 @@ Items returns the internal map as a set of elements
 
 
 
-### <a name="IntMap.Iterate">func</a> (IntMap) [Iterate](/src/target/int_map.go?s=1486:1538#L62)
+### <a name="IntMap.Iterate">func</a> (IntMap) [Iterate](/src/target/int_map.go?s=1765:1817#L75)
 ``` go
 func (i IntMap) Iterate() <-chan collections.Element
 ```
@@ -337,7 +385,16 @@ Iterate creates a channel to create an iterator for he Go range statement
 
 
 
-### <a name="IntMap.MostCommon">func</a> (IntMap) [MostCommon](/src/target/int_map.go?s=1808:1863#L74)
+### <a name="IntMap.Len">func</a> (IntMap) [Len](/src/target/int_map.go?s=688:713#L32)
+``` go
+func (i IntMap) Len() int
+```
+Len returns the number of stored keys
+
+
+
+
+### <a name="IntMap.MostCommon">func</a> (IntMap) [MostCommon](/src/target/int_map.go?s=2087:2142#L87)
 ``` go
 func (i IntMap) MostCommon(n int) []collections.Element
 ```
@@ -346,7 +403,16 @@ MostCommon returns the most common values by value
 
 
 
-### <a name="IntMap.String">func</a> (IntMap) [String](/src/target/int_map.go?s=2277:2308#L91)
+### <a name="IntMap.Set">func</a> (IntMap) [Set](/src/target/int_map.go?s=941:1006#L42)
+``` go
+func (i IntMap) Set(key collections.Data, value collections.Data)
+```
+Set replaces a keys counter data with another integer
+
+
+
+
+### <a name="IntMap.String">func</a> (IntMap) [String](/src/target/int_map.go?s=2556:2587#L104)
 ``` go
 func (i IntMap) String() string
 ```
@@ -355,7 +421,7 @@ String returns the JSON string representation of the map data
 
 
 
-### <a name="IntMap.Subtract">func</a> (IntMap) [Subtract](/src/target/int_map.go?s=854:900#L37)
+### <a name="IntMap.Subtract">func</a> (IntMap) [Subtract](/src/target/int_map.go?s=1133:1179#L50)
 ``` go
 func (i IntMap) Subtract(key collections.Data)
 ```
@@ -364,7 +430,7 @@ Subtract removes 1 from the counter if the key exists
 
 
 
-### <a name="IntMap.Update">func</a> (IntMap) [Update](/src/target/int_map.go?s=731:775#L32)
+### <a name="IntMap.Update">func</a> (IntMap) [Update](/src/target/int_map.go?s=818:862#L37)
 ``` go
 func (i IntMap) Update(key collections.Data)
 ```
@@ -393,7 +459,7 @@ NewIntMap32 takes in hash data, counts, and returns a concrete type that impleme
 
 
 
-### <a name="IntMap32.Delete">func</a> (IntMap32) [Delete](/src/target/int32_map.go?s=1046:1092#L45)
+### <a name="IntMap32.Delete">func</a> (IntMap32) [Delete](/src/target/int32_map.go?s=1333:1379#L58)
 ``` go
 func (i IntMap32) Delete(key collections.Data)
 ```
@@ -411,7 +477,7 @@ Get retrieves a data value from the internal map if it exists
 
 
 
-### <a name="IntMap32.Items">func</a> (IntMap32) [Items](/src/target/int32_map.go?s=1177:1224#L50)
+### <a name="IntMap32.Items">func</a> (IntMap32) [Items](/src/target/int32_map.go?s=1464:1511#L63)
 ``` go
 func (i IntMap32) Items() []collections.Element
 ```
@@ -420,7 +486,7 @@ Items returns the internal map as a set of elements
 
 
 
-### <a name="IntMap32.Iterate">func</a> (IntMap32) [Iterate](/src/target/int32_map.go?s=1530:1584#L62)
+### <a name="IntMap32.Iterate">func</a> (IntMap32) [Iterate](/src/target/int32_map.go?s=1817:1871#L75)
 ``` go
 func (i IntMap32) Iterate() <-chan collections.Element
 ```
@@ -429,7 +495,16 @@ Iterate creates a channel to create an iterator for he Go range statement
 
 
 
-### <a name="IntMap32.MostCommon">func</a> (IntMap32) [MostCommon](/src/target/int32_map.go?s=1856:1913#L74)
+### <a name="IntMap32.Len">func</a> (IntMap32) [Len](/src/target/int32_map.go?s=714:741#L32)
+``` go
+func (i IntMap32) Len() int
+```
+Len returns the number of stored keys
+
+
+
+
+### <a name="IntMap32.MostCommon">func</a> (IntMap32) [MostCommon](/src/target/int32_map.go?s=2143:2200#L87)
 ``` go
 func (i IntMap32) MostCommon(n int) []collections.Element
 ```
@@ -438,7 +513,16 @@ MostCommon returns the most common values by value
 
 
 
-### <a name="IntMap32.String">func</a> (IntMap32) [String](/src/target/int32_map.go?s=2329:2362#L91)
+### <a name="IntMap32.Set">func</a> (IntMap32) [Set](/src/target/int32_map.go?s=973:1040#L42)
+``` go
+func (i IntMap32) Set(key collections.Data, value collections.Data)
+```
+Set replaces a keys counter data with another integer
+
+
+
+
+### <a name="IntMap32.String">func</a> (IntMap32) [String](/src/target/int32_map.go?s=2616:2649#L104)
 ``` go
 func (i IntMap32) String() string
 ```
@@ -447,7 +531,7 @@ String returns the JSON string representation of the map data
 
 
 
-### <a name="IntMap32.Subtract">func</a> (IntMap32) [Subtract](/src/target/int32_map.go?s=884:932#L37)
+### <a name="IntMap32.Subtract">func</a> (IntMap32) [Subtract](/src/target/int32_map.go?s=1171:1219#L50)
 ``` go
 func (i IntMap32) Subtract(key collections.Data)
 ```
@@ -456,7 +540,7 @@ Subtract removes 1 from the counter if the key exists
 
 
 
-### <a name="IntMap32.Update">func</a> (IntMap32) [Update](/src/target/int32_map.go?s=757:803#L32)
+### <a name="IntMap32.Update">func</a> (IntMap32) [Update](/src/target/int32_map.go?s=846:892#L37)
 ``` go
 func (i IntMap32) Update(key collections.Data)
 ```
@@ -485,7 +569,7 @@ NewIntMap64 takes in hash data, counts, and returns a concrete type that impleme
 
 
 
-### <a name="IntMap64.Delete">func</a> (IntMap64) [Delete](/src/target/int64_map.go?s=1046:1092#L45)
+### <a name="IntMap64.Delete">func</a> (IntMap64) [Delete](/src/target/int64_map.go?s=1333:1379#L58)
 ``` go
 func (i IntMap64) Delete(key collections.Data)
 ```
@@ -503,7 +587,7 @@ Get retrieves a data value from the internal map if it exists
 
 
 
-### <a name="IntMap64.Items">func</a> (IntMap64) [Items](/src/target/int64_map.go?s=1177:1224#L50)
+### <a name="IntMap64.Items">func</a> (IntMap64) [Items](/src/target/int64_map.go?s=1464:1511#L63)
 ``` go
 func (i IntMap64) Items() []collections.Element
 ```
@@ -512,7 +596,7 @@ Items returns the internal map as a set of elements
 
 
 
-### <a name="IntMap64.Iterate">func</a> (IntMap64) [Iterate](/src/target/int64_map.go?s=1530:1584#L62)
+### <a name="IntMap64.Iterate">func</a> (IntMap64) [Iterate](/src/target/int64_map.go?s=1817:1871#L75)
 ``` go
 func (i IntMap64) Iterate() <-chan collections.Element
 ```
@@ -521,7 +605,16 @@ Iterate creates a channel to create an iterator for he Go range statement
 
 
 
-### <a name="IntMap64.MostCommon">func</a> (IntMap64) [MostCommon](/src/target/int64_map.go?s=1856:1913#L74)
+### <a name="IntMap64.Len">func</a> (IntMap64) [Len](/src/target/int64_map.go?s=714:741#L32)
+``` go
+func (i IntMap64) Len() int
+```
+Len returns the number of stored keys
+
+
+
+
+### <a name="IntMap64.MostCommon">func</a> (IntMap64) [MostCommon](/src/target/int64_map.go?s=2143:2200#L87)
 ``` go
 func (i IntMap64) MostCommon(n int) []collections.Element
 ```
@@ -530,7 +623,16 @@ MostCommon returns the most common values by value
 
 
 
-### <a name="IntMap64.String">func</a> (IntMap64) [String](/src/target/int64_map.go?s=2329:2362#L91)
+### <a name="IntMap64.Set">func</a> (IntMap64) [Set](/src/target/int64_map.go?s=973:1040#L42)
+``` go
+func (i IntMap64) Set(key collections.Data, value collections.Data)
+```
+Set replaces a keys counter data with another integer
+
+
+
+
+### <a name="IntMap64.String">func</a> (IntMap64) [String](/src/target/int64_map.go?s=2616:2649#L104)
 ``` go
 func (i IntMap64) String() string
 ```
@@ -539,7 +641,7 @@ String returns the JSON string representation of the map data
 
 
 
-### <a name="IntMap64.Subtract">func</a> (IntMap64) [Subtract](/src/target/int64_map.go?s=884:932#L37)
+### <a name="IntMap64.Subtract">func</a> (IntMap64) [Subtract](/src/target/int64_map.go?s=1171:1219#L50)
 ``` go
 func (i IntMap64) Subtract(key collections.Data)
 ```
@@ -548,7 +650,7 @@ Subtract removes 1 from the counter if the key exists
 
 
 
-### <a name="IntMap64.Update">func</a> (IntMap64) [Update](/src/target/int64_map.go?s=757:803#L32)
+### <a name="IntMap64.Update">func</a> (IntMap64) [Update](/src/target/int64_map.go?s=846:892#L37)
 ``` go
 func (i IntMap64) Update(key collections.Data)
 ```
@@ -577,7 +679,7 @@ NewStringMap takes in hash data, counts, and returns a concrete type that implem
 
 
 
-### <a name="StringMap.Delete">func</a> (StringMap) [Delete](/src/target/string_map.go?s=1064:1111#L45)
+### <a name="StringMap.Delete">func</a> (StringMap) [Delete](/src/target/string_map.go?s=1355:1402#L58)
 ``` go
 func (i StringMap) Delete(key collections.Data)
 ```
@@ -595,7 +697,7 @@ Get retrieves a data value from the internal map if it exists
 
 
 
-### <a name="StringMap.Items">func</a> (StringMap) [Items](/src/target/string_map.go?s=1197:1245#L50)
+### <a name="StringMap.Items">func</a> (StringMap) [Items](/src/target/string_map.go?s=1488:1536#L63)
 ``` go
 func (i StringMap) Items() []collections.Element
 ```
@@ -604,7 +706,7 @@ Items returns the internal map as a set of elements
 
 
 
-### <a name="StringMap.Iterate">func</a> (StringMap) [Iterate](/src/target/string_map.go?s=1552:1607#L62)
+### <a name="StringMap.Iterate">func</a> (StringMap) [Iterate](/src/target/string_map.go?s=1843:1898#L75)
 ``` go
 func (i StringMap) Iterate() <-chan collections.Element
 ```
@@ -613,7 +715,16 @@ Iterate creates a channel to create an iterator for he Go range statement
 
 
 
-### <a name="StringMap.MostCommon">func</a> (StringMap) [MostCommon](/src/target/string_map.go?s=1880:1938#L74)
+### <a name="StringMap.Len">func</a> (StringMap) [Len](/src/target/string_map.go?s=727:755#L32)
+``` go
+func (i StringMap) Len() int
+```
+Len returns the number of stored keys
+
+
+
+
+### <a name="StringMap.MostCommon">func</a> (StringMap) [MostCommon](/src/target/string_map.go?s=2171:2229#L87)
 ``` go
 func (i StringMap) MostCommon(n int) []collections.Element
 ```
@@ -622,7 +733,16 @@ MostCommon returns the most common values by value
 
 
 
-### <a name="StringMap.String">func</a> (StringMap) [String](/src/target/string_map.go?s=2355:2389#L91)
+### <a name="StringMap.Set">func</a> (StringMap) [Set](/src/target/string_map.go?s=989:1057#L42)
+``` go
+func (i StringMap) Set(key collections.Data, value collections.Data)
+```
+Set replaces a keys counter data with another integer
+
+
+
+
+### <a name="StringMap.String">func</a> (StringMap) [String](/src/target/string_map.go?s=2646:2680#L104)
 ``` go
 func (i StringMap) String() string
 ```
@@ -631,7 +751,7 @@ String returns the JSON string representation of the map data
 
 
 
-### <a name="StringMap.Subtract">func</a> (StringMap) [Subtract](/src/target/string_map.go?s=899:948#L37)
+### <a name="StringMap.Subtract">func</a> (StringMap) [Subtract](/src/target/string_map.go?s=1190:1239#L50)
 ``` go
 func (i StringMap) Subtract(key collections.Data)
 ```
@@ -640,7 +760,7 @@ Subtract removes 1 from the counter if the key exists
 
 
 
-### <a name="StringMap.Update">func</a> (StringMap) [Update](/src/target/string_map.go?s=770:817#L32)
+### <a name="StringMap.Update">func</a> (StringMap) [Update](/src/target/string_map.go?s=860:907#L37)
 ``` go
 func (i StringMap) Update(key collections.Data)
 ```
