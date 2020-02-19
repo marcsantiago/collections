@@ -12,6 +12,7 @@
 
 
 ## <a name="pkg-index">Index</a>
+* [func StringEncoder(encoder *bytes.Buffer, data Data, t Type)](#StringEncoder)
 * [type CounterMap](#CounterMap)
 * [type Data](#Data)
 * [type Element](#Element)
@@ -122,27 +123,30 @@
 * [type StringValues](#StringValues)
   * [func (s StringValues) Data() []Data](#StringValues.Data)
 * [type Type](#Type)
+  * [func DetermineDataType(data Data) Type](#DetermineDataType)
 
 
 #### <a name="pkg-files">Package files</a>
-[data.go](/src/github.com/marcsantiago/collections/data.go) [element_sorters.go](/src/github.com/marcsantiago/collections/element_sorters.go) [generic_map.go](/src/github.com/marcsantiago/collections/generic_map.go) [interable.go](/src/github.com/marcsantiago/collections/interable.go) [map.go](/src/github.com/marcsantiago/collections/map.go) [primitive_conversions.go](/src/github.com/marcsantiago/collections/primitive_conversions.go) [types.go](/src/github.com/marcsantiago/collections/types.go) 
+[data.go](/src/github.com/marcsantiago/collections/data.go) [element_sorters.go](/src/github.com/marcsantiago/collections/element_sorters.go) [generic_map.go](/src/github.com/marcsantiago/collections/generic_map.go) [interable.go](/src/github.com/marcsantiago/collections/interable.go) [map.go](/src/github.com/marcsantiago/collections/map.go) [primitive_conversions.go](/src/github.com/marcsantiago/collections/primitive_conversions.go) [string_encoder.go](/src/github.com/marcsantiago/collections/string_encoder.go) [types.go](/src/github.com/marcsantiago/collections/types.go) 
 
 
 
 
 
+## <a name="StringEncoder">func</a> [StringEncoder](/src/target/string_encoder.go?s=617:677#L30)
+``` go
+func StringEncoder(encoder *bytes.Buffer, data Data, t Type)
+```
+StringEncoder writes data into a bytes buffer, used in the String method
 
-## <a name="CounterMap">type</a> [CounterMap](/src/target/map.go?s=165:395#L5)
+
+
+
+## <a name="CounterMap">type</a> [CounterMap](/src/target/map.go?s=165:270#L5)
 ``` go
 type CounterMap interface {
-    Iterable
-    Delete(key Data)
-    Get(key Data) (Data, bool)
-    Len() int
-    Items() []Element
+    Map
     MostCommon(n int) []Element
-    Set(key Data, value Data)
-    String() string
     Subtract(value Data)
     Update(value Data)
 }
@@ -1042,7 +1046,7 @@ Iterable is anything that can be ranged on
 
 
 
-## <a name="Map">type</a> [Map](/src/target/map.go?s=421:573#L19)
+## <a name="Map">type</a> [Map](/src/target/map.go?s=296:448#L13)
 ``` go
 type Map interface {
     Iterable
@@ -1278,6 +1282,14 @@ Collection supported types
 
 
 
+
+
+### <a name="DetermineDataType">func</a> [DetermineDataType](/src/target/string_encoder.go?s=190:228#L11)
+``` go
+func DetermineDataType(data Data) Type
+```
+DetermineDataType gets the internal data type converts it to a supported collections type
+note this does use reflection
 
 
 

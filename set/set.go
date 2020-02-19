@@ -2,8 +2,6 @@ package set
 
 import (
 	"bytes"
-	"reflect"
-	"strconv"
 
 	"github.com/marcsantiago/collections"
 )
@@ -203,47 +201,11 @@ func (s Set) String() string {
 	var buf bytes.Buffer
 	i, max := 0, len(s)
 	for key := range s {
-		encode(&buf, key, determineDataType(key))
+		collections.StringEncoder(&buf, key, collections.DetermineDataType(key))
 		if i+1 < max {
 			buf.WriteRune(',')
 		}
 		i++
 	}
 	return buf.String()
-}
-
-// determineDataType gets the internal data type converts it to a supported collections type
-func determineDataType(data collections.Data) collections.Type {
-	switch reflect.TypeOf(data).Kind() {
-	case reflect.Int:
-		return collections.IntType
-	case reflect.Int32:
-		return collections.Int32Type
-	case reflect.Int64:
-		return collections.Int64Type
-	case reflect.Float32:
-		return collections.Float32Type
-	case reflect.Float64:
-		return collections.Float64Type
-	case reflect.String:
-		return collections.StringType
-	}
-	return collections.UnknownType
-}
-
-// encode writes data into a bytes buffer, used in the String method
-func encode(encoder *bytes.Buffer, data collections.Data, t collections.Type) {
-	// rip for optimization
-	const size = 0
-	b := make([]byte, size)
-	switch t {
-	case collections.IntType, collections.Int32Type, collections.Int64Type:
-		encoder.Write(strconv.AppendInt(b, data.Int64(), 10))
-	case collections.Float32Type:
-		encoder.Write(strconv.AppendFloat(b, data.Float64(), 'f', -1, 32))
-	case collections.Float64Type:
-		encoder.Write(strconv.AppendFloat(b, data.Float64(), 'f', -1, 64))
-	case collections.StringType:
-		encoder.Write([]byte("\"" + data.String() + "\""))
-	}
 }
