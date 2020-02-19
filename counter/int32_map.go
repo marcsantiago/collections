@@ -18,8 +18,7 @@ func NewIntMap32(hash map[int32]int) IntMap32 {
 			nh.Update(collections.IntValue32(key))
 		}
 	}
-	// return an empty Map ready for use
-	return IntMap32(hash)
+	return hash
 }
 
 // Get retrieves a data value from the internal map if it exists
@@ -38,12 +37,9 @@ func (i IntMap32) Update(key collections.Data) {
 	i[key.Int32()]++
 }
 
-// Set replaces a keys counter data with another integer
+// Set replaces a keys counter data with another integer or creates a new key with data
 func (i IntMap32) Set(key collections.Data, value collections.Data) {
-	_, ok := i[key.Int32()]
-	if ok {
-		i[key.Int32()] = value.Int()
-	}
+	i[key.Int32()] = value.Int()
 }
 
 // Subtract removes 1 from the counter if the key exists

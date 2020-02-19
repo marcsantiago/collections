@@ -47,3 +47,14 @@ func Counter(data []collections.Data, optionalType ...collections.Type) collecti
 
 	return hash
 }
+
+// GenericCounter unlike counter doesn't care what the data types are, it will simply count anything that satisfies the
+// collections.Data interface
+func GenericCounter(data []collections.Data) collections.CounterMap {
+	hash := make(DataMap)
+	// sets the key and increments duplications
+	for i := 0; i < len(data); i++ {
+		hash.Update(data[i])
+	}
+	return hash
+}

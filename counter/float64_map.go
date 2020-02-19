@@ -19,8 +19,7 @@ func NewFloatMap64(hash map[float64]int) FloatMap64 {
 			nh.Update(collections.FloatValue64(key))
 		}
 	}
-	// return an empty Map ready for use
-	return FloatMap64(hash)
+	return hash
 }
 
 // Get retrieves a data value from the internal map if it exists
@@ -39,12 +38,9 @@ func (i FloatMap64) Update(key collections.Data) {
 	i[key.Float64()]++
 }
 
-// Set replaces a keys counter data with another integer
+// Set replaces a keys counter data with another integer or creates a new key with data
 func (i FloatMap64) Set(key collections.Data, value collections.Data) {
-	_, ok := i[key.Float64()]
-	if ok {
-		i[key.Float64()] = value.Int()
-	}
+	i[key.Float64()] = value.Int()
 }
 
 // Subtract removes 1 from the counter if the key exists
