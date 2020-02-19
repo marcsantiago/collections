@@ -1,11 +1,6 @@
 package counter
 
 import (
-<<<<<<< HEAD
-=======
-	"fmt"
-
->>>>>>> Collections: Minor refactor
 	"github.com/marcsantiago/collections"
 )
 
@@ -45,12 +40,6 @@ func Counter(data []collections.Data, optionalType ...collections.Type) collecti
 		panic("slice type could not be determined")
 	}
 
-<<<<<<< HEAD
-=======
-	fmt.Println(data)
-	fmt.Println(specifiedType)
-	fmt.Println(hash)
->>>>>>> Collections: Minor refactor
 	// sets the key and increments duplications
 	for i := 0; i < len(data); i++ {
 		hash.Update(data[i])
