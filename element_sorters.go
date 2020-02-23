@@ -34,7 +34,7 @@ func (e ElementsByKeyIntDesc) Len() int           { return len(e) }
 func (e ElementsByKeyIntDesc) Less(i, j int) bool { return e[i].Key.Int() > e[j].Key.Int() }
 func (e ElementsByKeyIntDesc) Swap(i, j int)      { e[i], e[j] = e[j], e[i] }
 
-// ElementsByKeyStringAsc used to used low to high where value is of type string
+// ElementsByValueStringAsc used to used low to high where value is of type string
 type ElementsByValueStringAsc []Element
 
 func (e ElementsByValueStringAsc) Len() int { return len(e) }

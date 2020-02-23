@@ -347,7 +347,7 @@ func (e ElementsByKeyStringDesc) Swap(i, j int)
 
 
 
-## <a name="ElementsByValueIntAsc">type</a> [ElementsByValueIntAsc](/src/target/element_sorters.go?s=2414:2450#L56)
+## <a name="ElementsByValueIntAsc">type</a> [ElementsByValueIntAsc](/src/target/element_sorters.go?s=2416:2452#L56)
 ``` go
 type ElementsByValueIntAsc []Element
 ```
@@ -362,28 +362,28 @@ ElementsByValueIntAsc used to used low to high where value is of type string
 
 
 
-### <a name="ElementsByValueIntAsc.Len">func</a> (ElementsByValueIntAsc) [Len](/src/target/element_sorters.go?s=2452:2492#L58)
+### <a name="ElementsByValueIntAsc.Len">func</a> (ElementsByValueIntAsc) [Len](/src/target/element_sorters.go?s=2454:2494#L58)
 ``` go
 func (e ElementsByValueIntAsc) Len() int
 ```
 
 
 
-### <a name="ElementsByValueIntAsc.Less">func</a> (ElementsByValueIntAsc) [Less](/src/target/element_sorters.go?s=2521:2571#L59)
+### <a name="ElementsByValueIntAsc.Less">func</a> (ElementsByValueIntAsc) [Less](/src/target/element_sorters.go?s=2523:2573#L59)
 ``` go
 func (e ElementsByValueIntAsc) Less(i, j int) bool
 ```
 
 
 
-### <a name="ElementsByValueIntAsc.Swap">func</a> (ElementsByValueIntAsc) [Swap](/src/target/element_sorters.go?s=2619:2664#L60)
+### <a name="ElementsByValueIntAsc.Swap">func</a> (ElementsByValueIntAsc) [Swap](/src/target/element_sorters.go?s=2621:2666#L60)
 ``` go
 func (e ElementsByValueIntAsc) Swap(i, j int)
 ```
 
 
 
-## <a name="ElementsByValueIntDesc">type</a> [ElementsByValueIntDesc](/src/target/element_sorters.go?s=2780:2817#L63)
+## <a name="ElementsByValueIntDesc">type</a> [ElementsByValueIntDesc](/src/target/element_sorters.go?s=2782:2819#L63)
 ``` go
 type ElementsByValueIntDesc []Element
 ```
@@ -398,32 +398,32 @@ ElementsByValueIntDesc used to used high to low where value is of type string
 
 
 
-### <a name="ElementsByValueIntDesc.Len">func</a> (ElementsByValueIntDesc) [Len](/src/target/element_sorters.go?s=2819:2860#L65)
+### <a name="ElementsByValueIntDesc.Len">func</a> (ElementsByValueIntDesc) [Len](/src/target/element_sorters.go?s=2821:2862#L65)
 ``` go
 func (e ElementsByValueIntDesc) Len() int
 ```
 
 
 
-### <a name="ElementsByValueIntDesc.Less">func</a> (ElementsByValueIntDesc) [Less](/src/target/element_sorters.go?s=2889:2940#L66)
+### <a name="ElementsByValueIntDesc.Less">func</a> (ElementsByValueIntDesc) [Less](/src/target/element_sorters.go?s=2891:2942#L66)
 ``` go
 func (e ElementsByValueIntDesc) Less(i, j int) bool
 ```
 
 
 
-### <a name="ElementsByValueIntDesc.Swap">func</a> (ElementsByValueIntDesc) [Swap](/src/target/element_sorters.go?s=2988:3034#L67)
+### <a name="ElementsByValueIntDesc.Swap">func</a> (ElementsByValueIntDesc) [Swap](/src/target/element_sorters.go?s=2990:3036#L67)
 ``` go
 func (e ElementsByValueIntDesc) Swap(i, j int)
 ```
 
 
 
-## <a name="ElementsByValueStringAsc">type</a> [ElementsByValueStringAsc](/src/target/element_sorters.go?s=1668:1707#L38)
+## <a name="ElementsByValueStringAsc">type</a> [ElementsByValueStringAsc](/src/target/element_sorters.go?s=1670:1709#L38)
 ``` go
 type ElementsByValueStringAsc []Element
 ```
-ElementsByKeyStringAsc used to used low to high where value is of type string
+ElementsByValueStringAsc used to used low to high where value is of type string
 
 
 
@@ -434,28 +434,28 @@ ElementsByKeyStringAsc used to used low to high where value is of type string
 
 
 
-### <a name="ElementsByValueStringAsc.Len">func</a> (ElementsByValueStringAsc) [Len](/src/target/element_sorters.go?s=1709:1752#L40)
+### <a name="ElementsByValueStringAsc.Len">func</a> (ElementsByValueStringAsc) [Len](/src/target/element_sorters.go?s=1711:1754#L40)
 ``` go
 func (e ElementsByValueStringAsc) Len() int
 ```
 
 
 
-### <a name="ElementsByValueStringAsc.Less">func</a> (ElementsByValueStringAsc) [Less](/src/target/element_sorters.go?s=1771:1824#L41)
+### <a name="ElementsByValueStringAsc.Less">func</a> (ElementsByValueStringAsc) [Less](/src/target/element_sorters.go?s=1773:1826#L41)
 ``` go
 func (e ElementsByValueStringAsc) Less(i, j int) bool
 ```
 
 
 
-### <a name="ElementsByValueStringAsc.Swap">func</a> (ElementsByValueStringAsc) [Swap](/src/target/element_sorters.go?s=1879:1927#L44)
+### <a name="ElementsByValueStringAsc.Swap">func</a> (ElementsByValueStringAsc) [Swap](/src/target/element_sorters.go?s=1881:1929#L44)
 ``` go
 func (e ElementsByValueStringAsc) Swap(i, j int)
 ```
 
 
 
-## <a name="ElementsByValueStringDesc">type</a> [ElementsByValueStringDesc](/src/target/element_sorters.go?s=2041:2081#L47)
+## <a name="ElementsByValueStringDesc">type</a> [ElementsByValueStringDesc](/src/target/element_sorters.go?s=2043:2083#L47)
 ``` go
 type ElementsByValueStringDesc []Element
 ```
@@ -470,21 +470,21 @@ ElementsByValueStringDesc used to used high to low where value is of type string
 
 
 
-### <a name="ElementsByValueStringDesc.Len">func</a> (ElementsByValueStringDesc) [Len](/src/target/element_sorters.go?s=2083:2127#L49)
+### <a name="ElementsByValueStringDesc.Len">func</a> (ElementsByValueStringDesc) [Len](/src/target/element_sorters.go?s=2085:2129#L49)
 ``` go
 func (e ElementsByValueStringDesc) Len() int
 ```
 
 
 
-### <a name="ElementsByValueStringDesc.Less">func</a> (ElementsByValueStringDesc) [Less](/src/target/element_sorters.go?s=2146:2200#L50)
+### <a name="ElementsByValueStringDesc.Less">func</a> (ElementsByValueStringDesc) [Less](/src/target/element_sorters.go?s=2148:2202#L50)
 ``` go
 func (e ElementsByValueStringDesc) Less(i, j int) bool
 ```
 
 
 
-### <a name="ElementsByValueStringDesc.Swap">func</a> (ElementsByValueStringDesc) [Swap](/src/target/element_sorters.go?s=2255:2304#L53)
+### <a name="ElementsByValueStringDesc.Swap">func</a> (ElementsByValueStringDesc) [Swap](/src/target/element_sorters.go?s=2257:2306#L53)
 ``` go
 func (e ElementsByValueStringDesc) Swap(i, j int)
 ```
