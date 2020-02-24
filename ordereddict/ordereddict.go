@@ -7,18 +7,14 @@ import (
 )
 
 type OrderedDict struct {
-	keys      []collections.Data
-	hash      map[collections.Data]collections.Data
-	keyType   collections.Type
-	valueType collections.Type
+	keys []collections.Data
+	hash map[collections.Data]collections.Data
 }
 
 // OrderedDict returns a map initialized structure
 func New() OrderedDict {
 	return OrderedDict{
-		hash:      make(map[collections.Data]collections.Data),
-		keyType:   collections.UnknownType,
-		valueType: collections.UnknownType,
+		hash: make(map[collections.Data]collections.Data),
 	}
 }
 
@@ -51,12 +47,6 @@ func (o *OrderedDict) Set(key collections.Data, value collections.Data) {
 	if _, ok := o.hash[key]; ok {
 		return
 	}
-
-	// this allows for proper sudo JSON printing in the String method
-	if o.keyType == collections.UnknownType || o.valueType == collections.UnknownType {
-		o.keyType, o.valueType = collections.DetermineDataType(key), collections.DetermineDataType(value)
-	}
-
 	o.hash[key] = value
 	o.keys = append(o.keys, key)
 }
@@ -87,9 +77,9 @@ func (o OrderedDict) String() string {
 	buf.WriteString("OrderedDict([")
 	max := len(o.keys)
 	for i, key := range o.keys {
-		collections.StringEncoder(&buf, key, o.keyType)
+		collections.StringEncoder(&buf, key, collections.DetermineDataType(key))
 		buf.WriteRune(':')
-		collections.StringEncoder(&buf, o.hash[key], o.valueType)
+		collections.StringEncoder(&buf, o.hash[key], collections.DetermineDataType(o.hash[key]))
 		if i+1 < max {
 			buf.WriteRune(',')
 		}

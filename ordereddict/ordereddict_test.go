@@ -39,8 +39,6 @@ func TestOrderedDict(t *testing.T) {
 					collections.IntValue(7): collections.IntValue(14),
 					collections.IntValue(9): collections.IntValue(18),
 				},
-				keyType:   collections.IntType,
-				valueType: collections.IntType,
 			},
 		},
 	}
