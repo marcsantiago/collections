@@ -61,6 +61,48 @@ func TestOrderedDict(t *testing.T) {
 	}
 }
 
+func TestOrderedDict_Items(t *testing.T) {
+	tests := []struct {
+		name   string
+		rangeN int
+		delN   []int
+		want   []collections.Element
+	}{
+		{
+			name:   "should return items in the same order they were inserted",
+			rangeN: 10,
+			delN:   []int{0, 5, 8},
+			want: []collections.Element{
+				{Key: collections.IntValue(1), Value: collections.IntValue(2)},
+				{Key: collections.IntValue(2), Value: collections.IntValue(4)},
+				{Key: collections.IntValue(3), Value: collections.IntValue(6)},
+				{Key: collections.IntValue(4), Value: collections.IntValue(8)},
+				{Key: collections.IntValue(6), Value: collections.IntValue(12)},
+				{Key: collections.IntValue(7), Value: collections.IntValue(14)},
+				{Key: collections.IntValue(9), Value: collections.IntValue(18)},
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			od := New()
+			for i := 0; i < tt.rangeN; i++ {
+				key, value := i, i*2
+				od.Set(collections.IntValue(key), collections.IntValue(value))
+			}
+
+			for _, d := range tt.delN {
+				od.Delete(collections.IntValue(d))
+			}
+
+			items := od.Items()
+			if !cmp.Equal(items, tt.want) {
+				t.Fatalf("items() %+v\n", cmp.Diff(od, tt.want))
+			}
+		})
+	}
+}
+
 // get around unexported mutex
 func deepAllowUnexported(vs ...interface{}) cmp.Option {
 	m := make(map[reflect.Type]struct{})

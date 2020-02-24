@@ -8,13 +8,13 @@ import (
 
 type OrderedDict struct {
 	keys []collections.Data
-	hash map[collections.Data]collections.Data
+	hash collections.GenericMap
 }
 
 // OrderedDict returns a map initialized structure
 func New() OrderedDict {
 	return OrderedDict{
-		hash: make(map[collections.Data]collections.Data),
+		hash: make(collections.GenericMap),
 	}
 }
 
@@ -26,7 +26,7 @@ func (o OrderedDict) Get(key collections.Data) (collections.Data, bool) {
 
 // Delete removes the element from the internal map and the backing slice that records order
 func (o *OrderedDict) Delete(key collections.Data) {
-	if _, ok := o.hash[key]; !ok || len(o.hash) == 0 {
+	if _, ok := o.hash[key]; !ok {
 		return
 	}
 	delete(o.hash, key)
@@ -39,8 +39,12 @@ func (o *OrderedDict) Delete(key collections.Data) {
 			break
 		}
 	}
-	//o.keys = append(o.keys[:i], o.keys[i+1:]...)
 	o.keys = o.keys[:i+copy(o.keys[i:], o.keys[i+1:])]
+}
+
+// Len returns the number of stored keys
+func (o OrderedDict) Len() int {
+	return len(o.keys)
 }
 
 // Set updates the internal map and backing slice that records order
@@ -51,6 +55,18 @@ func (o *OrderedDict) Set(key collections.Data, value collections.Data) {
 	}
 	// add or update the key
 	o.hash[key] = value
+}
+
+// Items returns the internal map as a set of elements
+func (o OrderedDict) Items() []collections.Element {
+	items := make([]collections.Element, 0, len(o.keys))
+	for _, key := range o.keys {
+		items = append(items, collections.Element{
+			Key:   key,
+			Value: o.hash[key],
+		})
+	}
+	return items
 }
 
 // Iterate creates a channel to create an iterator for he Go range statement
