@@ -44,11 +44,12 @@ func (o *OrderedDict) Delete(key collections.Data) {
 
 // Set updates the internal map and backing slice that records order
 func (o *OrderedDict) Set(key collections.Data, value collections.Data) {
-	if _, ok := o.hash[key]; ok {
-		return
+	if _, ok := o.hash[key]; !ok {
+		// only append to the backing slice if the key doesn't already exist
+		o.keys = append(o.keys, key)
 	}
+	// add or update the key
 	o.hash[key] = value
-	o.keys = append(o.keys, key)
 }
 
 // Iterate creates a channel to create an iterator for he Go range statement
