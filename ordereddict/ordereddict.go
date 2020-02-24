@@ -34,6 +34,7 @@ func (o *OrderedDict) Delete(key collections.Data) {
 	var i int
 	for j, value := range o.keys {
 		if value == key {
+			o.keys[j] = nil // avoid memory leaks
 			i = j
 			break
 		}
