@@ -1,6 +1,11 @@
 package collections
 
-import "strconv"
+import (
+	"reflect"
+	"strconv"
+	"strings"
+	"unicode"
+)
 
 // IntValue type alias for int
 type IntValue int
@@ -33,6 +38,47 @@ func (i IntValue) Float64() float64 {
 // String casts and returns string value
 func (i IntValue) String() string {
 	return strconv.Itoa(int(i))
+}
+
+// Bool casts and returns bool
+func (i IntValue) Bool() bool {
+	if i == 0 {
+		return false
+	}
+	return true
+}
+
+// Less compares the other data and returns true if self is less than other
+func (i IntValue) Less(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int(i) < other.Int()
+	case reflect.Float32, reflect.Float64:
+		return int(i) < int(other.Float64())
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return int(i) < v
+	}
+	return false
+}
+
+// Equal compares the other data and returns true is the same as self's value, not self's value and type
+func (i IntValue) Equal(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int(i) == other.Int()
+	case reflect.Float32, reflect.Float64:
+		return int(i) == int(other.Float64())
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return int(i) == v
+	}
+	return false
+}
+
+// Greater compares the other data and returns true if self is greater than other
+func (i IntValue) Greater(other Data) bool {
+	return !i.Less(other)
 }
 
 // IntValues type alias for a slice of IntValue
@@ -79,6 +125,47 @@ func (i IntValue32) String() string {
 	return strconv.Itoa(int(i))
 }
 
+// Bool casts and returns bool
+func (i IntValue32) Bool() bool {
+	if i == 0 {
+		return false
+	}
+	return true
+}
+
+// Less compares the other data and returns true is it's less than self
+func (i IntValue32) Less(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int32(i) < other.Int32()
+	case reflect.Float32, reflect.Float64:
+		return int32(i) < int32(other.Float64())
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return int32(i) < int32(v)
+	}
+	return false
+}
+
+// Equal compares the other data and returns true is the same as self's value, not self's value and type
+func (i IntValue32) Equal(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int32(i) == other.Int32()
+	case reflect.Float32, reflect.Float64:
+		return int32(i) == int32(other.Float64())
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return int32(i) == int32(v)
+	}
+	return false
+}
+
+// Greater compares the other data and returns true is it's greater than self
+func (i IntValue32) Greater(other Data) bool {
+	return !i.Less(other)
+}
+
 // IntValues32 type alias for a slice of IntValue
 type IntValues32 []int32
 
@@ -121,6 +208,47 @@ func (i IntValue64) Float64() float64 {
 // String casts and returns string value
 func (i IntValue64) String() string {
 	return strconv.Itoa(int(i))
+}
+
+// Bool casts and returns bool
+func (i IntValue64) Bool() bool {
+	if i == 0 {
+		return false
+	}
+	return true
+}
+
+// Less compares the other data and returns true is it's less than self
+func (i IntValue64) Less(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int64(i) < other.Int64()
+	case reflect.Float32, reflect.Float64:
+		return int64(i) < int64(other.Float64())
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return int64(i) < int64(v)
+	}
+	return false
+}
+
+// Equal compares the other data and returns true is the same as self's value, not self's value and type
+func (i IntValue64) Equal(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int64(i) == other.Int64()
+	case reflect.Float32, reflect.Float64:
+		return int64(i) == int64(other.Float64())
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return int64(i) == int64(v)
+	}
+	return false
+}
+
+// Greater compares the other data and returns true is it's greater than self
+func (i IntValue64) Greater(other Data) bool {
+	return !i.Less(other)
 }
 
 // IntValues64 type alias for a slice of IntValue
@@ -167,6 +295,47 @@ func (i FloatValue32) String() string {
 	return strconv.FormatFloat(float64(i), 'f', -1, 32)
 }
 
+// Bool casts and returns bool
+func (i FloatValue32) Bool() bool {
+	if i == 0.0 {
+		return false
+	}
+	return true
+}
+
+// Less compares the other data and returns true is it's less than self
+func (i FloatValue32) Less(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return float32(i) < other.Float32()
+	case reflect.Float32, reflect.Float64:
+		return float32(i) < other.Float32()
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return float32(i) < float32(v)
+	}
+	return false
+}
+
+// Equal compares the other data and returns true is the same as self's value, not self's value and type
+func (i FloatValue32) Equal(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return float32(i) == other.Float32()
+	case reflect.Float32, reflect.Float64:
+		return float32(i) == other.Float32()
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return float32(i) == float32(v)
+	}
+	return false
+}
+
+// Greater compares the other data and returns true is it's greater than self
+func (i FloatValue32) Greater(other Data) bool {
+	return !i.Less(other)
+}
+
 // FloatValues32 type alias for a slice of IntValue
 type FloatValues32 []float32
 
@@ -209,6 +378,47 @@ func (i FloatValue64) Float64() float64 {
 // String casts and returns string value
 func (i FloatValue64) String() string {
 	return strconv.FormatFloat(float64(i), 'f', -1, 64)
+}
+
+// Bool casts and returns bool
+func (i FloatValue64) Bool() bool {
+	if i == 0.0 {
+		return false
+	}
+	return true
+}
+
+// Less compares the other data and returns true is it's less than self
+func (i FloatValue64) Less(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return float64(i) < other.Float64()
+	case reflect.Float32, reflect.Float64:
+		return float64(i) < other.Float64()
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return float64(i) < float64(v)
+	}
+	return false
+}
+
+// Equal compares the other data and returns true is the same as self's value, not self's value and type
+func (i FloatValue64) Equal(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return float64(i) == other.Float64()
+	case reflect.Float32, reflect.Float64:
+		return float64(i) == other.Float64()
+	case reflect.String:
+		v, _ := strconv.Atoi(other.String())
+		return float64(i) == float64(v)
+	}
+	return false
+}
+
+// Greater compares the other data and returns true is it's greater than self
+func (i FloatValue64) Greater(other Data) bool {
+	return !i.Less(other)
 }
 
 // FloatValues64 type alias for a slice of IntValue
@@ -260,6 +470,48 @@ func (s StringValue) String() string {
 	return string(s)
 }
 
+// Bool casts and returns bool
+func (s StringValue) Bool() bool {
+	switch strings.ToLower(string(s)) {
+	case "t", "true":
+		return true
+	}
+	return false
+}
+
+// Less compares the other data and returns true is it's less than self
+func (s StringValue) Less(other Data) bool {
+	v, _ := strconv.Atoi(string(s))
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return v < other.Int()
+	case reflect.Float32, reflect.Float64:
+		return float64(v) < other.Float64()
+	case reflect.String:
+		return string(s) < other.String()
+	}
+	return false
+}
+
+// Equal compares the other data and returns true is the same as self's value, not self's value and type
+func (s StringValue) Equal(other Data) bool {
+	v, _ := strconv.Atoi(string(s))
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return v == other.Int()
+	case reflect.Float32, reflect.Float64:
+		return float64(v) == other.Float64()
+	case reflect.String:
+		return string(s) == other.String()
+	}
+	return false
+}
+
+// Greater compares the other data and returns true is it's greater than self
+func (s StringValue) Greater(other Data) bool {
+	return !s.Less(other)
+}
+
 // StringValues type alias for a slice of StringValue
 type StringValues []string
 
@@ -302,6 +554,46 @@ func (s RuneValue) Float64() float64 {
 // String casts and returns string value
 func (s RuneValue) String() string {
 	return string(s)
+}
+
+// Bool casts and returns bool
+func (s RuneValue) Bool() bool {
+	switch unicode.ToLower(rune(s)) {
+	case 't':
+		return true
+	}
+	return false
+}
+
+// Less compares the other data and returns true is it's less than self
+func (s RuneValue) Less(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int32(s) < other.Int32()
+	case reflect.Float32, reflect.Float64:
+		return int32(s) < int32(other.Float64())
+	case reflect.String:
+		return string(s) < other.String()
+	}
+	return false
+}
+
+// Equal compares the other data and returns true is the same as self's value, not self's value and type
+func (s RuneValue) Equal(other Data) bool {
+	switch reflect.TypeOf(other).Kind() {
+	case reflect.Int, reflect.Int32, reflect.Int64:
+		return int32(s) == other.Int32()
+	case reflect.Float32, reflect.Float64:
+		return int32(s) == int32(other.Float64())
+	case reflect.String:
+		return string(s) == other.String()
+	}
+	return false
+}
+
+// Greater compares the other data and returns true is it's greater than self
+func (s RuneValue) Greater(other Data) bool {
+	return !s.Less(other)
 }
 
 // RuneValues type alias for a slice of RuneValue
