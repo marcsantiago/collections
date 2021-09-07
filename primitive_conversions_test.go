@@ -133,6 +133,20 @@ func TestValue_Greater(t *testing.T) {
 		want bool
 	}{
 		{
+			name: "values should be not be greater than they are equal",
+			dd: []Data{
+				IntValue(10),
+				IntValue32(10),
+				IntValue64(10),
+				FloatValue32(10),
+				FloatValue64(10),
+				StringValue("10"),
+				RuneValue(10),
+			},
+			args: args{other: IntValue(10)},
+			want: false,
+		},
+		{
 			name: "values should be greater int",
 			dd: []Data{
 				IntValue(10),
@@ -199,7 +213,7 @@ func TestValue_Greater(t *testing.T) {
 				StringValue("10"),
 				RuneValue(10),
 			},
-			args: args{other: FloatValue64(10)},
+			args: args{other: FloatValue64(9)},
 			want: true,
 		},
 		{
@@ -252,6 +266,20 @@ func TestValue_Less(t *testing.T) {
 		args args
 		want bool
 	}{
+		{
+			name: "values should be not be less than they are equal",
+			dd: []Data{
+				IntValue(10),
+				IntValue32(10),
+				IntValue64(10),
+				FloatValue32(10),
+				FloatValue64(10),
+				StringValue("10"),
+				RuneValue(10),
+			},
+			args: args{other: IntValue(10)},
+			want: false,
+		},
 		{
 			name: "values should be less int",
 			dd: []Data{

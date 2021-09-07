@@ -78,6 +78,9 @@ func (i IntValue) Equal(other Data) bool {
 
 // Greater compares the other data and returns true if self is greater than other
 func (i IntValue) Greater(other Data) bool {
+	if i.Equal(other) {
+		return false
+	}
 	return !i.Less(other)
 }
 
@@ -163,6 +166,9 @@ func (i IntValue32) Equal(other Data) bool {
 
 // Greater compares the other data and returns true is it's greater than self
 func (i IntValue32) Greater(other Data) bool {
+	if i.Equal(other) {
+		return false
+	}
 	return !i.Less(other)
 }
 
@@ -248,6 +254,9 @@ func (i IntValue64) Equal(other Data) bool {
 
 // Greater compares the other data and returns true is it's greater than self
 func (i IntValue64) Greater(other Data) bool {
+	if i.Equal(other) {
+		return false
+	}
 	return !i.Less(other)
 }
 
@@ -333,6 +342,9 @@ func (i FloatValue32) Equal(other Data) bool {
 
 // Greater compares the other data and returns true is it's greater than self
 func (i FloatValue32) Greater(other Data) bool {
+	if i.Equal(other) {
+		return false
+	}
 	return !i.Less(other)
 }
 
@@ -418,6 +430,9 @@ func (i FloatValue64) Equal(other Data) bool {
 
 // Greater compares the other data and returns true is it's greater than self
 func (i FloatValue64) Greater(other Data) bool {
+	if i.Equal(other) {
+		return false
+	}
 	return !i.Less(other)
 }
 
@@ -509,6 +524,9 @@ func (s StringValue) Equal(other Data) bool {
 
 // Greater compares the other data and returns true is it's greater than self
 func (s StringValue) Greater(other Data) bool {
+	if s.Equal(other) {
+		return false
+	}
 	return !s.Less(other)
 }
 
@@ -593,6 +611,9 @@ func (s RuneValue) Equal(other Data) bool {
 
 // Greater compares the other data and returns true is it's greater than self
 func (s RuneValue) Greater(other Data) bool {
+	if s.Equal(other) {
+		return false
+	}
 	return !s.Less(other)
 }
 
