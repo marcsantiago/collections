@@ -8,4 +8,9 @@ type Data interface {
 	Float32() float32
 	Float64() float64
 	String() string
+	Bool() bool
+
+	Less(other Data) bool
+	Equal(other Data) bool
+	Greater(other Data) bool
 }
