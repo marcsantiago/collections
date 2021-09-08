@@ -81,6 +81,31 @@ func (i IntValue) Greater(other Data) bool {
 	return !i.Less(other)
 }
 
+// Add adds OperableData together
+func (i IntValue) Add(data OperableData) Data {
+	return IntValue(int(i) + data.Int())
+}
+
+// Sub subtracts OperableData together
+func (i IntValue) Sub(data OperableData) Data {
+	return IntValue(int(i) - data.Int())
+}
+
+// Mul multiplies OperableData together
+func (i IntValue) Mul(data OperableData) Data {
+	return IntValue(int(i) * data.Int())
+}
+
+// Div divides OperableData together
+func (i IntValue) Div(data OperableData) Data {
+	return IntValue(int(i) / data.Int())
+}
+
+// Mod modulus' OperableData together
+func (i IntValue) Mod(data OperableData) Data {
+	return IntValue(int(i) % data.Int())
+}
+
 // IntValues type alias for a slice of IntValue
 type IntValues []int
 
@@ -166,6 +191,31 @@ func (i IntValue32) Greater(other Data) bool {
 	return !i.Less(other)
 }
 
+// Add adds OperableData together
+func (i IntValue32) Add(data OperableData) Data {
+	return IntValue32(int32(i) + data.Int32())
+}
+
+// Sub subtracts OperableData together
+func (i IntValue32) Sub(data OperableData) Data {
+	return IntValue32(int32(i) - data.Int32())
+}
+
+// Mul multiplies OperableData together
+func (i IntValue32) Mul(data OperableData) Data {
+	return IntValue32(int32(i) * data.Int32())
+}
+
+// Div divides OperableData together
+func (i IntValue32) Div(data OperableData) Data {
+	return IntValue32(int32(i) / data.Int32())
+}
+
+// Mod modulus' OperableData together
+func (i IntValue32) Mod(data OperableData) Data {
+	return IntValue32(int32(i) % data.Int32())
+}
+
 // IntValues32 type alias for a slice of IntValue
 type IntValues32 []int32
 
@@ -244,6 +294,31 @@ func (i IntValue64) Equal(other Data) bool {
 		return int64(i) == int64(v)
 	}
 	return false
+}
+
+// Add adds OperableData together
+func (i IntValue64) Add(data OperableData) Data {
+	return IntValue64(int64(i) + data.Int64())
+}
+
+// Sub subtracts OperableData together
+func (i IntValue64) Sub(data OperableData) Data {
+	return IntValue64(int64(i) - data.Int64())
+}
+
+// Mul multiplies OperableData together
+func (i IntValue64) Mul(data OperableData) Data {
+	return IntValue64(int64(i) * data.Int64())
+}
+
+// Div divides OperableData together
+func (i IntValue64) Div(data OperableData) Data {
+	return IntValue64(int64(i) / data.Int64())
+}
+
+// Mod modulus' OperableData together
+func (i IntValue64) Mod(data OperableData) Data {
+	return IntValue64(int64(i) % data.Int64())
 }
 
 // Greater compares the other data and returns true is it's greater than self
@@ -336,6 +411,31 @@ func (i FloatValue32) Greater(other Data) bool {
 	return !i.Less(other)
 }
 
+// Add adds OperableData together
+func (i FloatValue32) Add(data OperableData) Data {
+	return FloatValue32(float32(i) + data.Float32())
+}
+
+// Sub subtracts OperableData together
+func (i FloatValue32) Sub(data OperableData) Data {
+	return FloatValue32(float32(i) - data.Float32())
+}
+
+// Mul multiplies OperableData together
+func (i FloatValue32) Mul(data OperableData) Data {
+	return FloatValue32(float32(i) * data.Float32())
+}
+
+// Div divides OperableData together
+func (i FloatValue32) Div(data OperableData) Data {
+	return FloatValue32(float32(i) / data.Float32())
+}
+
+// Mod modulus' OperableData together, **note** mod only works on integer values to floats are cast to ints first
+func (i FloatValue32) Mod(data OperableData) Data {
+	return FloatValue32(int(i) % data.Int())
+}
+
 // FloatValues32 type alias for a slice of IntValue
 type FloatValues32 []float32
 
@@ -419,6 +519,31 @@ func (i FloatValue64) Equal(other Data) bool {
 // Greater compares the other data and returns true is it's greater than self
 func (i FloatValue64) Greater(other Data) bool {
 	return !i.Less(other)
+}
+
+// Add adds OperableData together
+func (i FloatValue64) Add(data OperableData) Data {
+	return FloatValue64(float64(i) + data.Float64())
+}
+
+// Sub subtracts OperableData together
+func (i FloatValue64) Sub(data OperableData) Data {
+	return FloatValue64(float64(i) - data.Float64())
+}
+
+// Mul multiplies OperableData together
+func (i FloatValue64) Mul(data OperableData) Data {
+	return FloatValue64(float64(i) * data.Float64())
+}
+
+// Div divides OperableData together
+func (i FloatValue64) Div(data OperableData) Data {
+	return FloatValue64(float64(i) / data.Float64())
+}
+
+// Mod modulus' OperableData together, **note** mod only works on integer values to floats are cast to ints first
+func (i FloatValue64) Mod(data OperableData) Data {
+	return FloatValue64(int(i) % data.Int())
 }
 
 // FloatValues64 type alias for a slice of IntValue
@@ -594,6 +719,31 @@ func (s RuneValue) Equal(other Data) bool {
 // Greater compares the other data and returns true is it's greater than self
 func (s RuneValue) Greater(other Data) bool {
 	return !s.Less(other)
+}
+
+// Add adds OperableData together
+func (s RuneValue) Add(data OperableData) Data {
+	return RuneValue(int32(s) + data.Int32())
+}
+
+// Sub subtracts OperableData together
+func (s RuneValue) Sub(data OperableData) Data {
+	return RuneValue(int32(s) - data.Int32())
+}
+
+// Mul multiplies OperableData together
+func (s RuneValue) Mul(data OperableData) Data {
+	return RuneValue(int32(s) * data.Int32())
+}
+
+// Div divides OperableData together
+func (s RuneValue) Div(data OperableData) Data {
+	return RuneValue(int32(s) / data.Int32())
+}
+
+// Mod modulus' OperableData together, **note** mod only works on integer values to floats are cast to ints first
+func (s RuneValue) Mod(data OperableData) Data {
+	return RuneValue(int(s) % data.Int())
 }
 
 // RuneValues type alias for a slice of RuneValue
