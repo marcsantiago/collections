@@ -3,19 +3,18 @@ package main
 import (
 	"fmt"
 
-	"github.com/marcsantiago/collections"
 	"github.com/marcsantiago/collections/set"
 )
 
 func main() {
-	x := set.New()
+	x := set.NewSet[int]()
 	for i := 0; i < 100; i++ {
-		x.Add(collections.IntValue(i))
+		x.Add(i)
 	}
 
-	y := set.New()
+	y := set.NewSet[int]()
 	for i := 50; i < 200; i++ {
-		y.Add(collections.IntValue(i))
+		y.Add(i)
 	}
 
 	intersect := x.Intersection(y)
@@ -23,13 +22,19 @@ func main() {
 	fmt.Println("Y", y)
 	fmt.Println("intersection", intersect)
 
-	alphabet := []rune("abcdefghijklmnopqrstuvwxyz ")
+	alphabet := "abcdefghijklmnopqrstuvwxyz"
+	alphaSet := set.NewSet[rune]()
+	for ch := range alphabet {
+		alphaSet.Add(rune(ch))
+	}
+
 	word := "hello world"
-	alphaSet := set.ConvertRuneSlice(alphabet)
-	wordSet := set.ConvertRuneSlice([]rune(word))
+	wordSet := set.NewSet[rune]()
+	for ch := range word {
+		alphaSet.Add(rune(ch))
+	}
 
 	if wordSet.IsSubset(alphaSet) {
 		fmt.Printf("\"%s\" seems like english", word)
 	}
-
 }
