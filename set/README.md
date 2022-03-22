@@ -1,304 +1,158 @@
-
-
 # set
-`import "github.com/marcsantiago/collections/set"`
 
-* [Overview](#pkg-overview)
-* [Index](#pkg-index)
-
-## <a name="pkg-overview">Overview</a>
 Package set is a Go parody of the Pythons set implementation and set methods
 
+## Functions
 
+### func [Zero](/set.go#L21)
 
+`func Zero[T any]() (ret T)`
 
-## <a name="pkg-index">Index</a>
-* [type Set](#Set)
-  * [func ConvertFloat32Slice(s []float32) Set](#ConvertFloat32Slice)
-  * [func ConvertFloat64Slice(s []float64) Set](#ConvertFloat64Slice)
-  * [func ConvertInt32Slice(s []int32) Set](#ConvertInt32Slice)
-  * [func ConvertInt64Slice(s []int64) Set](#ConvertInt64Slice)
-  * [func ConvertIntSlice(s []int) Set](#ConvertIntSlice)
-  * [func ConvertRuneSlice(s []rune) Set](#ConvertRuneSlice)
-  * [func ConvertStringSlice(s []string) Set](#ConvertStringSlice)
-  * [func New() Set](#New)
-  * [func (s Set) Add(data collections.Data)](#Set.Add)
-  * [func (s Set) Clear()](#Set.Clear)
-  * [func (s Set) Contains(data collections.Data) bool](#Set.Contains)
-  * [func (s Set) Copy() Set](#Set.Copy)
-  * [func (s Set) Difference(sets ...Set) Set](#Set.Difference)
-  * [func (s Set) DifferenceUpdate(sets ...Set)](#Set.DifferenceUpdate)
-  * [func (s Set) Discard(data collections.Data)](#Set.Discard)
-  * [func (s Set) Intersection(sets ...Set) Set](#Set.Intersection)
-  * [func (s Set) IntersectionUpdate(sets ...Set)](#Set.IntersectionUpdate)
-  * [func (s Set) IsDisjoint(ss Set) bool](#Set.IsDisjoint)
-  * [func (s Set) IsSubset(ss Set) bool](#Set.IsSubset)
-  * [func (s Set) IsSuperset(ss Set) bool](#Set.IsSuperset)
-  * [func (s Set) Pop() collections.Data](#Set.Pop)
-  * [func (s Set) Remove(key collections.Data)](#Set.Remove)
-  * [func (s Set) String() string](#Set.String)
-  * [func (s Set) SymmetricDifference(ss Set) Set](#Set.SymmetricDifference)
-  * [func (s Set) SymmetricDifferenceUpdate(ss Set)](#Set.SymmetricDifferenceUpdate)
-  * [func (s Set) Union(sets ...Set) Set](#Set.Union)
-  * [func (s Set) Update(sets ...Set)](#Set.Update)
+Zero returns the "empty" type of "any" T value
 
+## Types
 
-#### <a name="pkg-files">Package files</a>
-[doc.go](/src/github.com/marcsantiago/collections/set/doc.go) [set-conversions.go](/src/github.com/marcsantiago/collections/set/set-conversions.go) [set.go](/src/github.com/marcsantiago/collections/set/set.go) 
+### type [Set](/set.go#L16)
 
+`type Set[T comparable] struct { ... }`
 
+Set implements a generic set with common set functionality, this implementation is not safe for concurrency, guard your
+data with your own mutexes please
 
+#### func (*Set[T]) [Add](/set.go#L37)
 
+`func (s *Set[T]) Add(values ...T)`
 
-
-## <a name="Set">type</a> [Set](/src/target/set.go?s=96:134#L11)
-``` go
-type Set map[collections.Data]struct{}
-```
-
-
-
-
-
-
-### <a name="ConvertFloat32Slice">func</a> [ConvertFloat32Slice](/src/target/set-conversions.go?s=664:705#L33)
-``` go
-func ConvertFloat32Slice(s []float32) Set
-```
-ConvertFloat32Slice converts a float32 slice to a set
-
-
-### <a name="ConvertFloat64Slice">func</a> [ConvertFloat64Slice](/src/target/set-conversions.go?s=860:901#L42)
-``` go
-func ConvertFloat64Slice(s []float64) Set
-```
-ConvertFloat64Slice converts a float64 slice to a set
-
-
-### <a name="ConvertInt32Slice">func</a> [ConvertInt32Slice](/src/target/set-conversions.go?s=288:325#L15)
-``` go
-func ConvertInt32Slice(s []int32) Set
-```
-ConvertInt32Slice converts a int32 slice to a set
-
-
-### <a name="ConvertInt64Slice">func</a> [ConvertInt64Slice](/src/target/set-conversions.go?s=474:511#L24)
-``` go
-func ConvertInt64Slice(s []int64) Set
-```
-ConvertInt64Slice converts a int64 slice to a set
-
-
-### <a name="ConvertIntSlice">func</a> [ConvertIntSlice](/src/target/set-conversions.go?s=108:141#L6)
-``` go
-func ConvertIntSlice(s []int) Set
-```
-ConvertIntSlice converts a int slice to a set
-
-
-### <a name="ConvertRuneSlice">func</a> [ConvertRuneSlice](/src/target/set-conversions.go?s=1241:1276#L60)
-``` go
-func ConvertRuneSlice(s []rune) Set
-```
-ConvertRuneSlice converts a rune slice to a set
-
-
-### <a name="ConvertStringSlice">func</a> [ConvertStringSlice](/src/target/set-conversions.go?s=1054:1093#L51)
-``` go
-func ConvertStringSlice(s []string) Set
-```
-ConvertStringSlice converts a string slice to a set
-
-
-### <a name="New">func</a> [New](/src/target/set.go?s=170:184#L14)
-``` go
-func New() Set
-```
-New creates an initialized set
-
-
-
-
-
-### <a name="Set.Add">func</a> (Set) [Add](/src/target/set.go?s=245:284#L19)
-``` go
-func (s Set) Add(data collections.Data)
-```
 Add adds a unique item to the set
 
+#### func (*Set[T]) [Clear](/set.go#L45)
 
+`func (s *Set[T]) Clear()`
 
-
-### <a name="Set.Clear">func</a> (Set) [Clear](/src/target/set.go?s=436:456#L25)
-``` go
-func (s Set) Clear()
-```
 Clear removes all elements from the set by removing each element iteratively
 this allows for reuse of the backing map
 
+#### func (*Set[T]) [ClearForced](/set.go#L52)
 
+`func (s *Set[T]) ClearForced()`
 
+ClearForced removes all the data by instantiating a new Set
 
-### <a name="Set.Contains">func</a> (Set) [Contains](/src/target/set.go?s=563:612#L32)
-``` go
-func (s Set) Contains(data collections.Data) bool
-```
+#### func (*Set[T]) [Contains](/set.go#L57)
+
+`func (s *Set[T]) Contains(value T) bool`
+
 Contains returns true if the set contains the inputted data
 
+#### func (*Set[T]) [Copy](/set.go#L63)
 
+`func (s *Set[T]) Copy() *Set[T]`
 
-
-### <a name="Set.Copy">func</a> (Set) [Copy](/src/target/set.go?s=681:704#L38)
-``` go
-func (s Set) Copy() Set
-```
 Copy returns a copy of the set
 
+#### func (*Set[T]) [Difference](/set.go#L71)
 
+`func (s *Set[T]) Difference(sets ...*Set[T]) *Set[T]`
 
-
-### <a name="Set.Difference">func</a> (Set) [Difference](/src/target/set.go?s=939:979#L48)
-``` go
-func (s Set) Difference(sets ...Set) Set
-```
 Difference returns a set containing the difference between two or more sets
 The returned set contains items that exist only in the first set, and not in both sets.
 
+#### func (*Set[T]) [DifferenceUpdate](/set.go#L85)
 
+`func (s *Set[T]) DifferenceUpdate(sets ...*Set[T])`
 
-
-### <a name="Set.DifferenceUpdate">func</a> (Set) [DifferenceUpdate](/src/target/set.go?s=1309:1351#L62)
-``` go
-func (s Set) DifferenceUpdate(sets ...Set)
-```
 DifferenceUpdate updates the current set containing the difference between two or more sets
 The returned set contains items that exist only in the first set, and not in both sets.
 
+#### func (*Set[T]) [Discard](/set.go#L96)
 
+`func (s *Set[T]) Discard(value T)`
 
-
-### <a name="Set.Discard">func</a> (Set) [Discard](/src/target/set.go?s=1504:1547#L73)
-``` go
-func (s Set) Discard(data collections.Data)
-```
 Discard removes the specified item
 
+#### func (*Set[T]) [DiscardAny](/set.go#L100)
 
+`func (s *Set[T]) DiscardAny(value T)`
 
+#### func (*Set[T]) [Intersection](/set.go#L106)
 
-### <a name="Set.Intersection">func</a> (Set) [Intersection](/src/target/set.go?s=1792:1834#L79)
-``` go
-func (s Set) Intersection(sets ...Set) Set
-```
+`func (s *Set[T]) Intersection(sets ...*Set[T]) *Set[T]`
+
 Intersection method returns a set that contains the similarity between two or more sets
 The returned set contains only items that exist in both sets, or in all sets if the comparison is done with more than two sets.
 
+#### func (*Set[T]) [IntersectionUpdate](/set.go#L125)
 
+`func (s *Set[T]) IntersectionUpdate(sets ...*Set[T])`
 
-
-### <a name="Set.IntersectionUpdate">func</a> (Set) [IntersectionUpdate](/src/target/set.go?s=2274:2318#L98)
-``` go
-func (s Set) IntersectionUpdate(sets ...Set)
-```
 IntersectionUpdate updates the current set that contains the similarity between two or more sets
 The returned set contains only items that exist in both sets, or in all sets if the comparison is done with more than two sets.
 
+#### func (*Set[T]) [IsDisjoint](/set.go#L141)
 
+`func (s *Set[T]) IsDisjoint(ss *Set[T]) bool`
 
-
-### <a name="Set.IsDisjoint">func</a> (Set) [IsDisjoint](/src/target/set.go?s=2573:2609#L114)
-``` go
-func (s Set) IsDisjoint(ss Set) bool
-```
 IsDisjoint returns whether two sets have a intersection or not
 
+#### func (*Set[T]) [IsSubset](/set.go#L151)
 
+`func (s *Set[T]) IsSubset(ss *Set[T]) bool`
 
-
-### <a name="Set.IsSubset">func</a> (Set) [IsSubset](/src/target/set.go?s=2764:2798#L124)
-``` go
-func (s Set) IsSubset(ss Set) bool
-```
 IsSubset returns whether another set contains this set or not
 
+#### func (*Set[T]) [IsSuperset](/set.go#L161)
 
+`func (s *Set[T]) IsSuperset(ss *Set[T]) bool`
 
-
-### <a name="Set.IsSuperset">func</a> (Set) [IsSuperset](/src/target/set.go?s=3005:3041#L134)
-``` go
-func (s Set) IsSuperset(ss Set) bool
-```
 IsSuperset returns true if all items in the specified set exists in the original set, otherwise it returns false
 
+#### func (*Set[T]) [Pop](/set.go#L171)
 
+`func (s *Set[T]) Pop() (T, bool)`
 
-
-### <a name="Set.Pop">func</a> (Set) [Pop](/src/target/set.go?s=3174:3209#L144)
-``` go
-func (s Set) Pop() collections.Data
-```
 Pop removes a random item from the set
 
+#### func (*Set[T]) [Remove](/set.go#L180)
 
+`func (s *Set[T]) Remove(value T)`
 
-
-### <a name="Set.Remove">func</a> (Set) [Remove](/src/target/set.go?s=3322:3363#L153)
-``` go
-func (s Set) Remove(key collections.Data)
-```
 Remove removes the specified element
 
+#### func (*Set[T]) [Size](/set.go#L229)
 
+`func (s *Set[T]) Size() int`
 
+Size returns the number of items in the Set
 
-### <a name="Set.String">func</a> (Set) [String](/src/target/set.go?s=4528:4556#L202)
-``` go
-func (s Set) String() string
-```
-String creates an set representation of the internal map data
+#### func (*Set[T]) [String](/set.go#L234)
 
+`func (s *Set[T]) String() string`
 
+String creates a list representation of the set
 
+#### func (*Set[T]) [SymmetricDifference](/set.go#L185)
 
-### <a name="Set.SymmetricDifference">func</a> (Set) [SymmetricDifference](/src/target/set.go?s=3509:3553#L158)
-``` go
-func (s Set) SymmetricDifference(ss Set) Set
-```
+`func (s *Set[T]) SymmetricDifference(ss *Set[T]) *Set[T]`
+
 SymmetricDifference returns a set that contains all items from both set, but not the items that are present in both sets
 
+#### func (*Set[T]) [SymmetricDifferenceUpdate](/set.go#L198)
 
+`func (s *Set[T]) SymmetricDifferenceUpdate(ss *Set[T])`
 
-
-### <a name="Set.SymmetricDifferenceUpdate">func</a> (Set) [SymmetricDifferenceUpdate](/src/target/set.go?s=3827:3873#L171)
-``` go
-func (s Set) SymmetricDifferenceUpdate(ss Set)
-```
 SymmetricDifferenceUpdate updates the current set to contains all items from both set, but not the items that are present in both sets
 
+#### func (*Set[T]) [Union](/set.go#L209)
 
+`func (s *Set[T]) Union(sets ...*Set[T]) *Set[T]`
 
-
-### <a name="Set.Union">func</a> (Set) [Union](/src/target/set.go?s=4088:4123#L182)
-``` go
-func (s Set) Union(sets ...Set) Set
-```
 Union returns a set that contains all items from the original set, and all items from the specified sets.
 
+#### func (*Set[T]) [Update](/set.go#L220)
 
+`func (s *Set[T]) Update(sets ...*Set[T])`
 
-
-### <a name="Set.Update">func</a> (Set) [Update](/src/target/set.go?s=4351:4383#L193)
-``` go
-func (s Set) Update(sets ...Set)
-```
 Update updates the current set that contains all items from the original set, and all items from the specified sets.
 
-
-
-
-
-
-
-
-- - -
-Generated by [godoc2md](http://godoc.org/github.com/davecheney/godoc2md)
+---
+Readme created from Go doc with [goreadme](https://github.com/posener/goreadme)

@@ -2,16 +2,18 @@ package set
 
 import "fmt"
 
-type (
-	Ordered interface {
-		~int | ~int8 | ~int16 | ~int32 | ~int64 |
-			~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
-			~float32 | ~float64 |
-			~string
-	}
-)
+//type (
+//	Ordered interface {
+//		~int | ~int8 | ~int16 | ~int32 | ~int64 |
+//			~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr |
+//			~float32 | ~float64 |
+//			~string
+//	}
+//)
 
-type Set[T comparable] struct { // HL
+// Set implements a generic set with common set functionality, this implementation is not safe for concurrency, guard your
+// data with your own mutexes please
+type Set[T comparable] struct {
 	values map[T]struct{}
 }
 
@@ -20,13 +22,8 @@ func Zero[T any]() (ret T) {
 	return
 }
 
-//
-//func Nil[T any]() *T {
-//	return nil
-//}
-
-//NewSet creates an initialized set
-func NewSet[T comparable](values ...T) *Set[T] {
+// New creates an initialized set
+func New[T comparable](values ...T) *Set[T] {
 	m := make(map[T]struct{}, len(values))
 	for _, v := range values {
 		m[v] = struct{}{}
@@ -107,7 +104,7 @@ func (s *Set[T]) DiscardAny(value T) {
 // Intersection method returns a set that contains the similarity between two or more sets
 // The returned set contains only items that exist in both sets, or in all sets if the comparison is done with more than two sets.
 func (s *Set[T]) Intersection(sets ...*Set[T]) *Set[T] {
-	ns := NewSet[T]()
+	ns := New[T]()
 	for value := range s.values {
 		contained := true
 		for _, ss := range sets {

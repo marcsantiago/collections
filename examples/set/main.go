@@ -7,12 +7,12 @@ import (
 )
 
 func main() {
-	x := set.NewSet[int]()
+	x := set.New[int]()
 	for i := 0; i < 100; i++ {
 		x.Add(i)
 	}
 
-	y := set.NewSet[int]()
+	y := set.New[int]()
 	for i := 50; i < 200; i++ {
 		y.Add(i)
 	}
@@ -23,13 +23,13 @@ func main() {
 	fmt.Println("intersection", intersect)
 
 	alphabet := "abcdefghijklmnopqrstuvwxyz"
-	alphaSet := set.NewSet[rune]()
+	alphaSet := set.New[rune]()
 	for ch := range alphabet {
 		alphaSet.Add(rune(ch))
 	}
 
 	word := "hello world"
-	wordSet := set.NewSet[rune]()
+	wordSet := set.New[rune]()
 	for ch := range word {
 		alphaSet.Add(rune(ch))
 	}

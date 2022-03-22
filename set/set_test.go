@@ -18,12 +18,12 @@ func TestSet_Add(t *testing.T) {
 		{
 			name: "should add values without issue",
 			args: args{data: []int{1, 2, 3, 4, 5}},
-			want: NewSet(1, 2, 3, 4, 5),
+			want: New(1, 2, 3, 4, 5),
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := NewSet[int]()
+			s := New[int]()
 			for _, d := range tt.args.data {
 				s.Add(d)
 			}
@@ -43,7 +43,7 @@ func TestSet_Clear(t *testing.T) {
 	}{
 		{
 			name: "full set should be empty",
-			s:    NewSet(1, 2, 3, 4, 5),
+			s:    New(1, 2, 3, 4, 5),
 			want: 0,
 		},
 	}
@@ -69,13 +69,13 @@ func TestSet_Contains(t *testing.T) {
 	}{
 		{
 			name: "should contain the data",
-			s:    NewSet(1, 2, 3, 4, 5),
+			s:    New(1, 2, 3, 4, 5),
 			args: args{data: 2},
 			want: true,
 		},
 		{
 			name: "should not contain the data",
-			s:    NewSet(1, 2, 3, 4, 5),
+			s:    New(1, 2, 3, 4, 5),
 			args: args{data: 10},
 			want: false,
 		},
@@ -97,8 +97,8 @@ func TestSet_Copy(t *testing.T) {
 	}{
 		{
 			name: "should copy the set identically",
-			s:    NewSet(1, 2, 3, 4, 5),
-			want: NewSet(1, 2, 3, 4, 5),
+			s:    New(1, 2, 3, 4, 5),
+			want: New(1, 2, 3, 4, 5),
 		},
 	}
 	for _, tt := range tests {
@@ -123,11 +123,11 @@ func TestSet_Difference(t *testing.T) {
 		{
 			name: "should return the difference",
 			args: args{sets: []*Set[string]{
-				NewSet("google", "microsoft", "apple"),
-				NewSet("banana"),
+				New("google", "microsoft", "apple"),
+				New("banana"),
 			}},
-			s:    NewSet("apple", "banana", "cherry"),
-			want: NewSet("cherry"),
+			s:    New("apple", "banana", "cherry"),
+			want: New("cherry"),
 		},
 	}
 	for _, tt := range tests {
@@ -152,11 +152,11 @@ func TestSet_DifferenceUpdate(t *testing.T) {
 		{
 			name: "should return the difference",
 			args: args{sets: []*Set[string]{
-				NewSet("google", "microsoft", "apple"),
-				NewSet("banana"),
+				New("google", "microsoft", "apple"),
+				New("banana"),
 			}},
-			s:    NewSet("apple", "banana", "cherry"),
-			want: NewSet("cherry"),
+			s:    New("apple", "banana", "cherry"),
+			want: New("cherry"),
 		},
 	}
 	for _, tt := range tests {
@@ -181,9 +181,9 @@ func TestSet_Discard(t *testing.T) {
 	}{
 		{
 			name: "should remove the data from the set",
-			s:    NewSet(1, 2, 3, 4, 5),
+			s:    New(1, 2, 3, 4, 5),
 			args: args{data: 1},
-			want: NewSet(2, 3, 4, 5),
+			want: New(2, 3, 4, 5),
 		},
 	}
 	for _, tt := range tests {
@@ -209,11 +209,11 @@ func TestSet_Intersection(t *testing.T) {
 		{
 			name: "should return the intersection",
 			args: args{sets: []*Set[string]{
-				NewSet("google", "microsoft", "apple", "banana"),
-				NewSet("apple", "banana"),
+				New("google", "microsoft", "apple", "banana"),
+				New("apple", "banana"),
 			}},
-			s:    NewSet("apple", "banana", "cherry"),
-			want: NewSet("apple", "banana"),
+			s:    New("apple", "banana", "cherry"),
+			want: New("apple", "banana"),
 		},
 	}
 	for _, tt := range tests {
@@ -238,11 +238,11 @@ func TestSet_IntersectionUpdate(t *testing.T) {
 		{
 			name: "should return the intersection",
 			args: args{sets: []*Set[string]{
-				NewSet("google", "microsoft", "apple", "banana"),
-				NewSet("apple", "banana"),
+				New("google", "microsoft", "apple", "banana"),
+				New("apple", "banana"),
 			}},
-			s:    NewSet("apple", "banana", "cherry"),
-			want: NewSet("apple", "banana"),
+			s:    New("apple", "banana", "cherry"),
+			want: New("apple", "banana"),
 		},
 	}
 	for _, tt := range tests {
@@ -267,17 +267,17 @@ func TestSet_IsDisjoint(t *testing.T) {
 	}{
 		{
 			name: "sets should be disjointed",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{
-				NewSet("google", "microsoft"),
+				New("google", "microsoft"),
 			},
 			want: true,
 		},
 		{
 			name: "sets should not be disjointed",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{
-				NewSet("apple", "google", "microsoft"),
+				New("apple", "google", "microsoft"),
 			},
 			want: false,
 		},
@@ -303,17 +303,17 @@ func TestSet_IsSubset(t *testing.T) {
 	}{
 		{
 			name: "sets should be a subset",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{
-				NewSet("apple", "banana", "cherry", "google", "microsoft"),
+				New("apple", "banana", "cherry", "google", "microsoft"),
 			},
 			want: true,
 		},
 		{
 			name: "sets should not be a subset",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{
-				NewSet("apple", "google", "microsoft"),
+				New("apple", "google", "microsoft"),
 			},
 			want: false,
 		},
@@ -339,17 +339,17 @@ func TestSet_IsSuperset(t *testing.T) {
 	}{
 		{
 			name: "sets should be a super set",
-			s:    NewSet("apple", "banana", "cherry", "google", "microsoft"),
+			s:    New("apple", "banana", "cherry", "google", "microsoft"),
 			args: args{
-				NewSet("apple", "banana", "cherry"),
+				New("apple", "banana", "cherry"),
 			},
 			want: true,
 		},
 		{
 			name: "sets should not be a super set",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{
-				NewSet("apple", "google", "microsoft"),
+				New("apple", "google", "microsoft"),
 			},
 			want: false,
 		},
@@ -373,13 +373,13 @@ func TestSet_Pop(t *testing.T) {
 	}{
 		{
 			name: "should randomly remove an item from the set",
-			s:    NewSet("apple"),
+			s:    New("apple"),
 			want: "apple",
 			ok:   true,
 		},
 		{
 			name:     "should return nothing",
-			s:        NewSet("apple"),
+			s:        New("apple"),
 			popTwice: true,
 			want:     "",
 			ok:       false,
@@ -410,8 +410,8 @@ func TestSet_Remove(t *testing.T) {
 		{
 			name: "should  remove an item from the set",
 			args: args{key: "cherry"},
-			s:    NewSet("apple", "banana", "cherry"),
-			want: NewSet("apple", "banana"),
+			s:    New("apple", "banana", "cherry"),
+			want: New("apple", "banana"),
 		},
 	}
 	for _, tt := range tests {
@@ -436,11 +436,11 @@ func TestSet_SymmetricDifference(t *testing.T) {
 	}{
 		{
 			name: "should return symmetric difference",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{
-				ss: NewSet("google", "microsoft", "apple"),
+				ss: New("google", "microsoft", "apple"),
 			},
-			want: NewSet("banana", "cherry", "microsoft", "google"),
+			want: New("banana", "cherry", "microsoft", "google"),
 		},
 	}
 	for _, tt := range tests {
@@ -464,11 +464,11 @@ func TestSet_SymmetricDifferenceUpdate(t *testing.T) {
 	}{
 		{
 			name: "should return symmetric difference",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{
-				ss: NewSet("google", "microsoft", "apple"),
+				ss: New("google", "microsoft", "apple"),
 			},
-			want: NewSet("banana", "cherry", "microsoft", "google"),
+			want: New("banana", "cherry", "microsoft", "google"),
 		},
 	}
 	for _, tt := range tests {
@@ -493,12 +493,12 @@ func TestSet_Union(t *testing.T) {
 	}{
 		{
 			name: "should add all the sets together",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{sets: []*Set[string]{
-				NewSet("google", "microsoft", "apple", "banana"),
-				NewSet("apple", "banana"),
+				New("google", "microsoft", "apple", "banana"),
+				New("apple", "banana"),
 			}},
-			want: NewSet("apple", "banana", "cherry", "google", "microsoft"),
+			want: New("apple", "banana", "cherry", "google", "microsoft"),
 		},
 	}
 	for _, tt := range tests {
@@ -522,12 +522,12 @@ func TestSet_Update(t *testing.T) {
 	}{
 		{
 			name: "should add all the sets together",
-			s:    NewSet("apple", "banana", "cherry"),
+			s:    New("apple", "banana", "cherry"),
 			args: args{sets: []*Set[string]{
-				NewSet("google", "microsoft", "apple", "banana"),
-				NewSet("apple", "banana"),
+				New("google", "microsoft", "apple", "banana"),
+				New("apple", "banana"),
 			}},
-			want: NewSet("apple", "banana", "cherry", "google", "microsoft"),
+			want: New("apple", "banana", "cherry", "google", "microsoft"),
 		},
 	}
 	for _, tt := range tests {
@@ -541,7 +541,7 @@ func TestSet_Update(t *testing.T) {
 }
 
 func BenchmarkSet_Add(b *testing.B) {
-	set := NewSet[int]()
+	set := New[int]()
 	for i := 0; i < 10000; i++ {
 		set.Add(i)
 	}
